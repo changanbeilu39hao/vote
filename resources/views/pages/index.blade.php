@@ -3,14 +3,23 @@
 @section('content')
 
 @if ( Session::get('totle_'.Auth::user()->id) == 1 )
-<form action="{{ route('check.confirm') }}" method="POST"  onsubmit="return validator()";>
+
+      <!-- 筛选组件开始 -->
+    <div class="ml-5">
+        <input type="radio" name="level" value="2">⭐⭐
+        <input type="radio" name="level" value="3">⭐⭐⭐
+    </div>
+
+{{-- <form action="{{ route('check.confirm') }}" method="POST"  onsubmit="return validator()";>
     @csrf
     
     <div class="alert alert-success">
         <p>由于您已全部审查完作品，请确认结果</p>
         <button class="btn-success" type="submit">确认结果</button>
     </div>
-</form>
+</form> --}}
+@endif
+
 
 <form action="{{ route('check.store') }}" method="POST">
     @csrf
@@ -18,7 +27,7 @@
 <div class="jumbotron ml-4 mr-4">
 
 
-    @endif
+   
     <div class="row">
     @foreach ($data as $v)
     <input type="hidden" name="all_ids[]" value="{{ $v->id }}">

@@ -20,7 +20,7 @@ class CheckController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $inspected = DB::table('users')->where('id', Auth::user()->id)->value('inspected');
         if ($inspected == 1) {
@@ -35,7 +35,19 @@ class CheckController extends Controller
             Session::put('totle_'.Auth::user()->id, 1);
         }
 
-        $data = DB::table('works')->paginate(4);
+        if ($request->get('level') != null){
+            if ($request->get('level') == 2){
+                
+            }
+            if ($request->get('level') == 3){
+
+            }
+            
+        }else{
+            $data = DB::table('works')->paginate(4);
+        };
+
+        
 
         $selected_ids = DB::table('user_item')
                         ->where('user_id', Auth::user()->id)
