@@ -24,7 +24,6 @@ class HomeController extends Controller
     public function index()
     {
         $data = file_get_contents("http://192.168.9.125:8085/api/WorkApi/list?page=1&size=100&group=1");
-        dd($data);
-        return view('home');
+        return $data;
     }
 }

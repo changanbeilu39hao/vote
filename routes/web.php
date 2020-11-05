@@ -13,17 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/pre', 'CheckController@pre')->name('check.pre');
+Route::post('/pre/store', 'CheckController@pre_store')->name('check.store');
 
 Auth::routes();
-Route::get('check', 'CheckController@index');
+Route::get('/', 'CheckController@index');
 
-Route::post('check/store', 'CheckController@store')->name('check.store');
-Route::post('check/confirm', 'CheckController@confirm')->name('check.confirm');
+// Route::post('check/store', 'CheckController@store')->name('check.store');
+// Route::post('check/confirm', 'CheckController@confirm')->name('check.confirm');
+
 

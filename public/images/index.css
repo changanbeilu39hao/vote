@@ -1,0 +1,519 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+}
+body{
+	font-family: "microsoft yahei";
+}
+ul,li{
+	list-style: none;
+}
+img{
+	display: block;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+input{
+	outline: none;
+}
+/*顶部*/
+.top{
+	width: 100%;
+	height: 60px;
+	background: #be0d0d;
+}
+.top p{
+	font-size: 26px;
+	line-height: 60px;
+	color: #fff;
+	float: left;
+	margin-left: 10px;
+}
+.top_r{
+	float: right;
+	line-height: 60px;
+}
+.top_r span,.top_r a{
+	font-size: 18px;
+	color: #fff;
+	margin: 0 10px;
+}
+
+/*导航*/
+.nav{
+	width: 1200px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 40px;
+}
+.nav span{
+	padding: 6px 20px;
+	font-size: 20px;
+	line-height: 40px;
+	border: 1px solid #BE0D0D;
+	box-sizing: border-box;
+	color: #BE0D0D;
+	margin: 0 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: bold;
+}
+.nav span:hover{
+	background: #BE0D0D;
+	color: #fff;
+}
+.nav .nav_cur{
+	background: #BE0D0D;
+	color: #fff;
+}
+
+/*主体内容*/
+.main{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	margin-top: 40px;
+}
+
+/*初选平台*/
+.chuxuan{
+	width: 1360px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+/*统计*/
+.tongji {
+	width: 1200px;
+	margin: 0 auto;
+	height: auto;
+	overflow: hidden;
+}
+.tongji_top{
+	width: 100%;
+	border-bottom: 1px solid #CBCBCB;
+	border-top: 1px solid #CBCBCB;
+	padding: 10px 0;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.tongji_top span{
+	font-size: 26px;
+	font-weight: bold;
+	float: left;
+}
+.tongji_top button{
+	font-size: 18px;
+	border: 1px solid #cbcbcb;
+	box-sizing: border-box;
+	color: #999;
+	float: right;
+	padding: 0 20px;
+	background: none;
+	border-radius: 600px;
+	margin-top: 2px;
+	line-height: 30px;
+}
+.tongji_top button:hover{
+	background: #BE0D0D;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+.tongji_bot{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	border-bottom: 1px solid #CBCBCB;
+	 padding: 10px 0;
+}
+.tongji_bot_item{
+	width: 400px;
+	height: auto;
+	overflow: hidden;
+	float: left;
+	text-align: center;
+}
+.tongji_bot_item span{
+	font-size: 18px;
+	color: #999;
+	display: block;
+}
+.tongji_bot_item p{
+	font-size: 24px;
+	color: #BE0D0D;
+	font-weight: bold;
+}
+.tongji_bot_item p:after{
+	content: "件";
+	color: #999;
+	font-size: 16px;
+	font-weight: normal;
+	vertical-align: middle;
+}
+
+/*筛选*/
+.shaixuan{
+	width: 1200px;
+	height: 36px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #CBCBCB;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+.shaixuan_l{
+	float: left;
+}
+.shaixuan_l from{
+	float: left;
+}
+.shaixuan_l input[type = text]{
+	 width: 200px;
+	 height: 36px;
+	 border: 1px solid #CBCBCB;
+	 font-size: 18px;
+	 padding: 0 10px;
+	 box-sizing: border-box;
+	 display: block;
+	 float: left;
+	 border-radius: 6px;
+}
+.shaixuan_l input[type = submit]{
+	 height: 36px;
+	 border: 1px solid #CBCBCB;
+	 font-size: 18px;
+	 padding: 0 20px;
+	box-sizing: border-box;
+	margin-left: 10px;
+	display: block;
+	 float: left;
+	 background: none;
+	 border-radius: 6px;
+}
+.shaixuan_l input[type = submit]:hover{
+	background: #BE0D0D;
+	color: #fff;
+	border-color:transparent;
+}
+.shaixuan_l span{
+	line-height: 36px;
+	padding: 0 20px;
+	border: 1px solid #CBCBCB;
+	box-sizing: border-box;
+	margin: 0 5px;
+	color: #333;
+	border-radius: 6px;
+	cursor: pointer;
+	float: left;
+	display: block;
+	overflow: hidden;
+}
+.shaixuan_l span:first-of-type{
+	margin-left: 20px;
+}
+.shaixuan_l span:hover{
+	background: #BE0D0D;
+	color: #fff;
+	border-color:transparent;
+}
+.shaixuan_l .shaixuancur{
+	background: #BE0D0D;
+	color: #fff;
+	border-color: transparent;
+}
+.shaixuan_r{
+	float: right;
+	color: #999;
+	font-size: 18px;
+	line-height: 36px;
+}
+.shaixuan_r span{
+	font-size: 22px;
+	color: #BE0D0D;
+	font-weight: bold;
+}
+.shaixuan_r span:after{
+	content: "件";
+	color: #999;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+/*作品*/
+.zuopin{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	position: relative;
+	margin-top: 20px;
+}
+.prev1,.next1 {
+	display: block;
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	border: 1px solid #BE0D0D;
+	color: #BE0D0D;
+	position: absolute;
+	top: 50%;
+	margin-top: -30px;
+	border-radius: 50%;
+	text-align: center;
+}
+.prev1{
+	left: 0;
+}
+.next1{
+	right: 0;
+}
+.prev1:hover,.next1:hover{
+	color: #fff;
+	background: #BE0D0D;
+}
+.zuopin_main{
+	width: 1200px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+}
+.zuopin_item{
+	width: 580px;
+	height: auto;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.zuopin_item:nth-of-type(odd){
+	float: left;
+}
+.zuopin_item:nth-of-type(even){
+	float: right;
+}
+.zuopin_item_img{
+	width: 100%;
+	height: 394px;
+	position: relative;
+	overflow: hidden;
+}
+.zuopin_item_img img{
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.zuopin_item_img span{
+	position: absolute;
+	cursor: pointer;
+}
+.star{
+	width: 36px;
+	height: 36px;
+	display: block;
+	background: url(star_stroke.png) no-repeat center center;
+	right: 10px;
+	top:10px;
+}
+.star_fill{
+	background: url(star_fill.png) no-repeat center center;
+}
+.star_stroke{
+	background: url(star_stroke.png) no-repeat center center;
+}
+.realImg{
+	font-size: 14px;
+	line-height: 26px;
+	padding: 0 10px;
+	box-sizing: border-box;
+	background: rgba(0,0,0,0.5);
+	color: #fff;
+	top:16px;
+	right: 70px;
+	border-radius: 30px;
+	display: block;
+}
+.details{
+	font-size: 14px;
+	line-height: 26px;
+	padding: 0 10px;
+	box-sizing: border-box;
+	background: rgba(0,0,0,0.5);
+	color: #fff;
+	top:10px;
+	right: 10px;
+	border-radius: 30px;
+	z-index: 10;
+	position: absolute;
+}
+.zuopin_id{
+	width: 100%;
+	line-height: 32px;
+	font-size: 16px;
+	text-align: center;
+}
+.zuopin_id:before{
+	content: "作品编号: ";
+}
+
+.zuopin_item_img_bot{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	margin-top: 6px;
+}
+.zuopin_item_img_bot p{
+	line-height: 32px;
+	font-size: 16px;
+	text-align: left;
+	float: left;
+}
+.zuopin_item_img_bot p:before{
+	content: "作品编号: ";
+}
+.zuopin_item_img_bot form{
+	float: right;
+	display: inline;
+}
+.zuopin_item_img_bot input[ type = text ]{
+	font-size: 16px;
+	line-height: 30px;
+	box-sizing: border-box;
+	width: 120px;
+	border: 1px solid #cbcbcb;
+	border-radius: 4px;
+	padding: 0 10px;
+}
+.zuopin_item_img_bot input[ type = submit ]{
+	font-size: 16px;
+	line-height: 30px;
+	box-sizing: border-box;
+	border-radius: 4px;
+	margin-left: 10px;
+	padding: 0 10px; 
+	background: #BE0D0D;
+	color: #fff;
+	border: none;
+}
+.pingfen_line{
+	width: 1200px;
+	margin: 0 auto;
+}
+.chuxuan:nth-of-type(2){
+	display: none;
+}
+.scoreShow{
+	width: 60px;
+	height: 60px;
+	display: block;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	background: rgba(190,13,13,0.6);
+	color: #fff;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 60px;
+	border-radius: 50%;
+	display: none;
+}
+.pinfen_item{
+	margin-bottom: 20px;
+}
+
+/*分页*/
+.page{
+	width: 100%;
+	text-align: center;
+	height: 30px;
+	margin-top: 60px;
+	padding-bottom: 100px;
+}
+.page a {
+	font-size: 14px;
+	color: #999;
+	border: 1px solid #CBCBCB;
+	box-sizing: border-box;
+	border-radius: 4px;
+	line-height: 30px;
+	margin: 0 5px;
+	padding: 0 10px;
+}
+.page a:hover,.topage span:hover{
+	background: #BE0D0D;
+	color: #fff;
+	border-color:transparent;
+}
+.page .pagecur{
+	background: #BE0D0D;
+	color: #fff;
+	border-color:transparent;
+}
+.topage{
+	display: inline-block;
+	width: 180px;
+}
+.topage input{
+	width: 64px;
+	height: 100%;
+	border:1px solid #cbcbcb;
+	display: inline-block;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+.topage span{
+	font-size: 14px;
+	color: #999;
+	border: 1px solid #CBCBCB;
+	box-sizing: border-box;
+	border-radius: 6px;
+	line-height: 30px;
+	margin: 0 5px;
+	padding: 0 10px;
+}
+
+/*大图*/
+.showImg{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: rgba(0,0,0,0.6);
+	text-align: center;
+	display: none;
+}
+.showImg img{
+	height: 100%;
+	width: auto;
+	display: inline;
+}
+
+
+
+.paginationjs-pages{
+    display: flex;
+    justify-content: center;
+}
+
+.paginationjs-pages ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.paginationjs-pages ul>li{
+    margin: 0 5px;
+}
