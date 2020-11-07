@@ -32,7 +32,7 @@ window.onload =function(){
 	//确认作品
 	var star = document.querySelectorAll(".star")
 	var mypass = document.querySelector('.shaixuan_r span')
-	var mypass_num =0
+	var mypass_num = mypass.innerHTML;
 	
 	for(var star_index = 0; star_index < star.length; star_index++){
 		star[star_index].onclick = function(){
@@ -53,18 +53,18 @@ window.onload =function(){
 	}
 	
 	//提交验证
-	var push = document.querySelector(".push")
-	var threeStar = document.querySelector(".threeStar")
-	push.onclick = function(){
-		var threeStar_num =  parseInt(threeStar.innerText) 
-		if(threeStar_num < 2000){
-			alert("三星作品少于2000件")
-		}else if(threeStar_num > 2000){
-			alert("三星作品多于2000件")
-		}else{
-			//执行提交	
-		}
-	}
+	// var push = document.querySelector(".push")
+	// var threeStar = document.querySelector(".threeStar")
+	// push.onclick = function(){
+	// 	var threeStar_num =  parseInt(threeStar.innerText) 
+	// 	if(threeStar_num < 2000){
+	// 		alert("三星作品少于2000件")
+	// 	}else if(threeStar_num > 2000){
+	// 		alert("三星作品多于2000件")
+	// 	}else{
+	// 		//执行提交	
+	// 	}
+	// }
 	
 	//打分
 	var scoreShow = document.querySelectorAll(".scoreShow")

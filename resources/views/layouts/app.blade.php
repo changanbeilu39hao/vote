@@ -21,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div>
 		<div class="top"> 
 			<p>四川森林草原防灭火安全教育手抄报征集活动初选平台&评分平台</p>
 			<div class="top_r">
@@ -46,10 +46,11 @@
                 @endswitch
             </span>
                 <span>{{ Auth::user()->name }}</span>
-                <form action="{{ route('logout') }}" method="POST" id="del">
-                    {{ csrf_field() }}
-                <a href="#" onclick="document.getElementById('del').submit();return false;">退出登录</a>
-                </form>
+				<a href="{{ route('logout') }}" onclick="event.preventDefault();
+				document.getElementById('logout-form').submit();">退出登录</a>
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+					@csrf
+				</form>
                 @endguest   
 
 			</div>

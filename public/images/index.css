@@ -173,7 +173,7 @@ input{
 .shaixuan_l{
 	float: left;
 }
-.shaixuan_l from{
+.shaixuan_l form{
 	float: left;
 }
 .shaixuan_l input[type = text]{
@@ -473,6 +473,44 @@ input{
 	box-sizing: border-box;
 }
 .topage span{
+	font-size: 14px;
+	color: #999;
+	border: 1px solid #CBCBCB;
+	box-sizing: border-box;
+	border-radius: 6px;
+	line-height: 30px;
+	margin: 0 5px;
+	padding: 0 10px;
+}
+
+
+.paginationjs-pages{
+	width: 100%;
+	text-align: center;
+	height: 30px;
+	margin-top: 60px;
+	padding-bottom: 100px;
+}
+
+.paginationjs-pages ul>li{
+	font-size: 14px;
+	color: #999;
+	border: 1px solid #CBCBCB;
+	box-sizing: border-box;
+	border-radius: 4px;
+	line-height: 30px;
+	margin: 0 5px;
+	padding: 0 10px;
+}
+.paginationjs-go-input input{
+	width: 64px;
+	height: 100%;
+	border:1px solid #cbcbcb;
+	display: inline-block;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+.paginationjs-go-button {
 	font-size: 14px;
 	color: #999;
 	border: 1px solid #CBCBCB;

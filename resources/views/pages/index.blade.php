@@ -60,17 +60,18 @@
 					</div>
 					
 					<div class="tongji_bot">
+						
 						<div class="tongji_bot_item">
 							<span>三星作品</span>
-							<p class="threeStar">0</p>
+							<p class="threeStar">{{ $works_num['level_3'] }}</p>
 						</div>
 						<div class="tongji_bot_item">
 							<span>二星作品</span>
-							<p>0</p>
+							<p>{{ $works_num['level_2'] }}</p>
 						</div>
 						<div class="tongji_bot_item">
 							<span>一星作品</span>
-							<p>0</p>
+							<p>{{ $works_num['level_1'] }}</p>
 						</div>
 					</div>			
 				</div>
@@ -78,22 +79,25 @@
 				<!--筛选-->
 				<div class="shaixuan">
 					<div class="shaixuan_l">
-						<from>
-							<input type="text" name="id" placeholder="作品编号"  />
+						<form action="{{ route('check.prev') }}" method="post">
+							{{ csrf_field() }}
+							<input type="text" name="search_id" placeholder="作品编号"  />
 							<input type="submit" value="搜索" />
-						</from>
-						<span class="shaixuancur" title="表示有三个人通过的作品">三星作品</span>
-						<span title="表示有二个人通过的作品">二星作品</span>
-						<span title="表示有一个人通过的作品">一星作品</span>
+						</form>
+
+						<span id="all_c" ><a  href="{{ route('check.pre') }}">全部作品</a></span>
+						<span id="sanxing_c" title="表示有三个人通过的作品"><a  href="{{ route('check.pre') }}?level=3">三星作品</a></span>
+						<span id="erxing_c" title="表示有二个人通过的作品"><a  href="{{ route('check.pre') }}?level=2">二星作品</a></span>
+						<span id="yixing_c" title="表示有一个人通过的作品"><a  href="{{ route('check.pre') }}?level=1">一星作品</a></span>
 					</div>
 					
-					<div class="shaixuan_r">我已选作品: <span>0</span></div>
+					<div class="shaixuan_r">我已选作品: <span>{{ Session::get('user_count_'.Auth::user()->id) }}</span></div>
 				</div>
 				
 				<!--作品-->
 				<div class="zuopin">
-					<a href="#" class="prev1">上一页</a>
-					<a href="#" class="next1">下一页</a>
+					<a href="@if($page == 1) # @else{{ $pre_url }} @endif" class="prev1">上一页</a>
+					<a href="@if($page == $total_page) # @else{{ $next_url }} @endif" class="next1">下一页</a>
 					<div class="zuopin_main" id="WorkdList">
 						
 						<!--img 中的 rel 属性为原始图片的地址-->
@@ -115,15 +119,13 @@
 								<span class="realImg">查看原图</span>
 							</div>
 							<p class="zuopin_id">0000000</p>
-						</div> --}}
-
-						
+						</div> --}}				
 					</div>
 				</div>				
 				
 				<!--分页-->
-				<div class="page page1">
-					{{-- <a href="#" class="prev">上一页</a>
+				{{-- <div class="page page1">
+					<a href="#" class="prev">上一页</a>
 					<a href="#" class="pagecur">1</a>
 					<a href="#">2</a>
 					<a href="#">3</a>
@@ -139,13 +141,14 @@
 						到
 						<input type="text" />
 						页
-						<span>确定</span> --}}
-					{{-- </div> --}}
-				</div>
+						<span>确定</span>
+					</div> 
+				</div> --}}
 
-				<div id="fyq" class="paginationjs-theme-blue">
+				<div id="fyq" >
 
 				</div>
+	
 			</div>
 			
 			<!--评分平台-->
@@ -256,7 +259,9 @@
 		</div>
 	</body>
 </html>
-
+@if (app()->isLocal())
+@include('sudosu::user-selector')
+@endif
 
 <script type="text/javascript" src="images/jquery-3.5.1.min.js" ></script>
 <script type="text/javascript" src="images/pagination.min.js" ></script>
@@ -274,18 +279,52 @@
  },
 	pageSize:4,
 	pageNumber:{{ $page }},
-    showPrevious: true,
-	showNext: true,
-	// showGoInput: true,
-    // showGoButton: true,
+    // showPrevious: true,
+	// showNext: true,
+
 });
+
+
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+
 $(function(){
+	var l = getUrlParam('level');
+	if (l==3) {
+		$("#sanxing_c").addClass('shaixuancur');
+	}
+	if (l==2) {
+		$("#erxing_c").addClass('shaixuancur');
+	}
+	if (l==1) {
+		$("#yixing_c").addClass('shaixuancur');
+	}
+	if (l==null) {
+		$("#all_c").addClass('shaixuancur');
+	}
         $(".J-paginationjs-page").click(function(){
 			var a = $(this).attr('data-num');
-            $(window).attr('location', "http://vote.test/pre?size=4&page="+a+"");
+			var l = getUrlParam('level');
+			console.log(l);
+            $(window).attr('location', "{{ $r_url }}?size=4&page="+a+"&group={{ Auth::user()->group_id }}&level="+l+"");
 		});
 
 	});
+
+	var to_page ="<div class='paginationjs-go-input'><input id='to_page' type='text' name='page'></div>"
+	var to_button = "<button class='paginationjs-go-button' type='submit'>确定</button>"
+	$(".paginationjs-pages").append(to_page);
+	$(".paginationjs-pages").append(to_button);
+
+	$(".paginationjs-go-button").on("click", function(){
+		var l = getUrlParam('level');
+		var a = $("#to_page").val();
+		$(window).attr('location', "{{ $r_url }}?size=4&page="+a+"&group={{ Auth::user()->group_id }}&level="+l+"");
+	})
+
 	$("#WorkdList").on("click","span.star",function(){
 		var _id=$(this).data("id");
 
@@ -300,11 +339,32 @@ $(function(){
                 id:_id,
             },
             success: function (data) {
-                console.log(data)
+               	return 200
+				}
+			})
+		});
+
+
+	$(".push").on("click",function(){
+		$.ajax({
+            type: "POST",
+            url: "{{ url('/pre/confirm') }}",
+            dataType: 'json',
+			headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        	},
+            data: {
+                user_id: {{  Auth::user()->id }},
             },
-        });
-
-
+            success: function (data) {
+				if(data == 201){
+					alert('请确认此组三星作品为2000件！')
+				}
+				if(data == 200){
+					alert('作品确认成功 ！');
+					$(window).attr('location', "{{ $r_url }}");
+            }
+        }})
 	})
 
 

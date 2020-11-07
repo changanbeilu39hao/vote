@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/pre', 'CheckController@pre')->name('check.pre');
+Route::post('/pre', 'CheckController@pre')->name('check.prev');
 Route::post('/pre/store', 'CheckController@pre_store')->name('check.store');
+Route::post('/pre/confirm', 'CheckController@pre_confirm')->name('check.confirm');
+
+Route::get('/score', 'ScoresController@index')->name('score.index');
 
 Auth::routes();
 Route::get('/', 'CheckController@index');
