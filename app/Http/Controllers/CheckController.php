@@ -119,12 +119,12 @@ class CheckController extends Controller
     public function pre(Request $request, $page=1, $size=4)
     {
         $group_id = Auth::user()->group_id;
-        $inspected = DB::table('users')->where('group_id', $group_id)->where('inspected', 1)->first();
-        if ($inspected !=null) {
+        $inspected = DB::table('users')->where('id', Auth::user()->id)->where('group_id', $group_id)->where('inspected', 1)->first();
+        if ($inspected !=null ) {
             throw new InvalidRequestException('此组已完成作品审查，请前往评分平台！');
         }
 
-        $group_id = Auth::user()->group_id;
+      
         // 作品数据
         if ($request->get('page') !=null && $size = $request->get('size') != null){
             $page = $request->get('page');
@@ -139,25 +139,26 @@ class CheckController extends Controller
 
         $level_1_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 1) AND status = 1"))); 
 
-        $level_2_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 2) AND status = 1"))); 
+        $level_2_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 2) AND status = 1")))/2; 
 
-        $level_3_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1"))); 
+        $level_3_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1")))/3; 
 
 
-        $data = file_get_contents("http://192.168.9.125:8085/api/WorkApi/list?page=$page&size=$size&group=$group_id");
+        $data = file_get_contents(config('app.api_url')."/api/WorkApi/list?page=$page&size=$size&group=$group_id");
         $data = json_decode($data,true);
 
         $_level = 0;
         if ($request->get('level') != null && $request->get('level') != 0 ){
             $_level = $request->get('level');
-            $level_url = 'http://192.168.9.125:8085/api/WorkApi/';
+            $level_url = config('app.api_url').'/api/WorkApi/';
             $level_data = [];
             $level_page = $request->get('level');
             switch ($level_page) {
                 case 1:
 
                     $data['count'] = $level_1_count;
-                    $level_1 = DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 1) AND status = 1 limit $level_limit,$size;");
+                    $level_1 = DB::select("select DISTINCT a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 1) AND status = 1 limit $level_limit,$size;");
+
                     foreach (array_map('get_object_vars', $level_1) as $v) {
                         $level_json = (array) json_decode(file_get_contents($level_url.$v['item_id']));
                         $level_data[] = (array) $level_json['data'];
@@ -167,7 +168,7 @@ class CheckController extends Controller
 
                     $data['count'] = $level_2_count;
 
-                    $level_2 = DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 2) AND status = 1 limit $level_limit,$size;");
+                    $level_2 = DB::select("select DISTINCT a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 2) AND status = 1 limit $level_limit,$size;");
                     foreach (array_map('get_object_vars', $level_2) as $v) {
                         $level_json = (array) json_decode(file_get_contents($level_url.$v['item_id']));
                         $level_data[] =(array)  $level_json['data'];
@@ -177,7 +178,7 @@ class CheckController extends Controller
 
                     $data['count'] = $level_3_count;
 
-                    $level_3 = DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1 limit $level_limit,$size;");
+                    $level_3 = DB::select("select DISTINCT a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1 limit $level_limit,$size;");
                     foreach (array_map('get_object_vars', $level_3) as $v) {
                         $level_json = (array) json_decode(file_get_contents($level_url.$v['item_id']));
                         $level_data[] = (array) $level_json['data'];
@@ -186,20 +187,20 @@ class CheckController extends Controller
             $works = $level_data;
 
         }elseif ($request->get('search_id') != null){
-            $search_id = (array) json_decode(file_get_contents('http://192.168.9.125:8085/api/WorkApi/'.$request->get('search_id')));
+            $search_id = (array) json_decode(file_get_contents(config('app.api_url')."/api/WorkApi/".$request->get('search_id')));
             // dd($search_id);
             $works[0] = (array)$search_id['data'];
             $data['count'] = 2;
            
         }
         else{
-            $data = file_get_contents("http://192.168.9.125:8085/api/WorkApi/list?page=$page&size=$size&group=$group_id");
+            $data = file_get_contents(config('app.api_url')."/api/WorkApi/list?page=$page&size=$size&group=$group_id");
             $data = json_decode($data,true);
             $works = $data['data'];
   
         }
     
-        $url = 'https://aqjy.newssc.org';
+        $url = config('app.api_url');
         
         // 页码
         $r_url = route('check.pre');
@@ -238,7 +239,6 @@ class CheckController extends Controller
             }
 
         // 
-
         $works_num = [];
         $works_num['level_1'] = $level_1_count;
         $works_num['level_2'] = $level_2_count;
@@ -282,7 +282,7 @@ class CheckController extends Controller
         if ($request->ajax()){
             $user_id = $request->get('user_id');
             $group_id = DB::table('users')->where('id', $user_id)->value('group_id');
-            $level_3_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1"))); 
+            $level_3_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1")))/3; 
 
             if ($level_3_count == 2000) {
                 DB::table('users')->where('id', $user_id)->update(['inspected'=>1]);

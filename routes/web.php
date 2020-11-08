@@ -22,9 +22,13 @@ Route::post('/pre/store', 'CheckController@pre_store')->name('check.store');
 Route::post('/pre/confirm', 'CheckController@pre_confirm')->name('check.confirm');
 
 Route::get('/score', 'ScoresController@index')->name('score.index');
+Route::post('/score', 'ScoresController@store')->name('score.store');
+Route::post('/score/confirm', 'ScoresController@confirm')->name('score.confirm');
 
 Auth::routes();
-Route::get('/', 'CheckController@index');
+Route::get('/', function(){
+    return redirect(route('check.pre'));
+});
 
 // Route::post('check/store', 'CheckController@store')->name('check.store');
 // Route::post('check/confirm', 'CheckController@confirm')->name('check.confirm');

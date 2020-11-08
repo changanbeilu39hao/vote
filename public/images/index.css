@@ -66,13 +66,23 @@ input{
 	cursor: pointer;
 	font-weight: bold;
 }
-.nav span:hover{
-	background: #BE0D0D;
-	color: #fff;
-}
+
+
 .nav .nav_cur{
 	background: #BE0D0D;
 	color: #fff;
+}
+.r_cur{
+	padding: 6px 20px;
+	font-size: 20px;
+	line-height: 40px;
+	border: 1px solid #BE0D0D;
+	box-sizing: border-box;
+	color: #BE0D0D;
+	margin: 0 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: bold;
 }
 
 /*主体内容*/
@@ -519,6 +529,23 @@ input{
 	line-height: 30px;
 	margin: 0 5px;
 	padding: 0 10px;
+}
+
+.btn_over,.btn_lock{
+	padding: 0 20px;
+	line-height: 30px;
+	font-size: 16px;
+	background: #be0d0d;
+	color: #fff;
+	text-align: center;
+	margin-right: 20px;
+	cursor: pointer;
+	border-radius: 6px;
+	display: block;
+	float: left;
+}
+.btn_lock{
+	margin-right: 80px;
 }
 
 /*大图*/

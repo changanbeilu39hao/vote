@@ -1,21 +1,21 @@
 window.onload =function(){
 	
 	//导航
-	var nav = document.querySelectorAll(".nav span")
-	var chuxuan = document.querySelectorAll(".chuxuan")
-//	addcalss(nav,"nav_cur");
-	for(var i = 0; i < nav.length; i++){
-		nav[i].index = i
-		nav[i].onclick = function(){
-			var index = this.index
-			for(var j = 0; j <nav.length; j++){
-				nav[j].className = ""
-				chuxuan[j].style.display = "none"
-			}
-			chuxuan[index].style.display = "block"
-			this.className += " nav_cur"
-		}
-	}
+// 	var nav = document.querySelectorAll(".nav span")
+// 	var chuxuan = document.querySelectorAll(".chuxuan")
+// //	addcalss(nav,"nav_cur");
+// 	for(var i = 0; i < nav.length; i++){
+// 		nav[i].index = i
+// 		nav[i].onclick = function(){
+// 			var index = this.index
+// 			for(var j = 0; j <nav.length; j++){
+// 				nav[j].className = ""
+// 				chuxuan[j].style.display = "none"
+// 			}
+// 			chuxuan[index].style.display = "block"
+// 			this.className += " nav_cur"
+// 		}
+// 	}
 
 	
 	//筛选

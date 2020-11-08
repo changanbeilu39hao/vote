@@ -45,7 +45,7 @@
 		<!--导航-->
 		<div class="nav">
 			<span class="nav_cur">初选平台</span>
-			<span>评分平台</span>
+			<span > <a style="color:#BE0D0D" href="{{ route('score.index') }}">评分平台 </a></span>
 		</div>
 		
 		<div class="main">
@@ -86,9 +86,9 @@
 						</form>
 
 						<span id="all_c" ><a  href="{{ route('check.pre') }}">全部作品</a></span>
-						<span id="sanxing_c" title="表示有三个人通过的作品"><a  href="{{ route('check.pre') }}?level=3">三星作品</a></span>
-						<span id="erxing_c" title="表示有二个人通过的作品"><a  href="{{ route('check.pre') }}?level=2">二星作品</a></span>
-						<span id="yixing_c" title="表示有一个人通过的作品"><a  href="{{ route('check.pre') }}?level=1">一星作品</a></span>
+						<span id="sanxing_c" title="表示有三个人通过的作品"><a  href="{{ route('check.pre') }}?level=3&page=1&size=4">三星作品</a></span>
+						<span id="erxing_c" title="表示有二个人通过的作品"><a  href="{{ route('check.pre') }}?level=2&page=1&size=4">二星作品</a></span>
+						<span id="yixing_c" title="表示有一个人通过的作品"><a  href="{{ route('check.pre') }}?level=1&page=1&size=4">一星作品</a></span>
 					</div>
 					
 					<div class="shaixuan_r">我已选作品: <span>{{ Session::get('user_count_'.Auth::user()->id) }}</span></div>
@@ -123,27 +123,7 @@
 					</div>
 				</div>				
 				
-				<!--分页-->
-				{{-- <div class="page page1">
-					<a href="#" class="prev">上一页</a>
-					<a href="#" class="pagecur">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<a href="#">5</a>
-					<a href="#">6</a>
-					<a href="#">7</a>
-					<a href="#">8</a>
-					<a>...</a>
-					<a href="#">200</a>
-					<a href="#" class="next">上一页</a>
-					<div class="topage">
-						到
-						<input type="text" />
-						页
-						<span>确定</span>
-					</div> 
-				</div> --}}
+
 
 				<div id="fyq" >
 
@@ -151,103 +131,6 @@
 	
 			</div>
 			
-			<!--评分平台-->
-			<div class="chuxuan">
-				<hr class="pingfen_line" />
-				<!--作品-->
-				<div class="zuopin">
-					<a href="#" class="prev1">上一页</a>
-					<a href="#" class="next1">下一页</a>
-					<div class="zuopin_main">
-			
-						<div class="zuopin_item pinfen_item">
-							<div class="zuopin_item_img">
-								<img src="images/img1.jpg" />
-								<a href="#" class="details">查看详情</a>
-								<span class="scoreShow">90</span>
-							</div>
-							<div class="zuopin_item_img_bot">
-								<p >0000000</p>
-								<form action="#" method="post">
-									<input type="number" name="score" placeholder="0-80分" required/>
-									<input type="submit" class="postScore" value="确定"/>
-								</form>
-							</div>
-						</div>
-						
-						<div class="zuopin_item pinfen_item">
-							<div class="zuopin_item_img">
-								<img src="images/img1.jpg" />
-								<a href="#" class="details">查看详情</a>
-								<span class="scoreShow">90</span>
-							</div>
-							<div class="zuopin_item_img_bot">
-								<p >0000000</p>
-								<form action="#" method="post">
-									<input type="number" name="score" max="80" min="0" placeholder="0-80分"  required/>
-									<input type="submit" class="postScore" value="确定"/>
-								</form>
-							</div>
-						</div>
-						
-						<div class="zuopin_item pinfen_item">
-							<div class="zuopin_item_img">
-								<img src="images/img1.jpg" />
-								<a href="#" class="details">查看详情</a>
-								<span class="scoreShow">90</span>
-							</div>
-							<div class="zuopin_item_img_bot">
-								<p >0000000</p>
-								<form action="#" method="post">
-									<input type="number" name="score" placeholder="0-80分" required/>
-									<input type="submit" class="postScore" value="确定"/>
-								</form>
-							</div>
-						</div>
-						
-						<div class="zuopin_item pinfen_item">
-							<div class="zuopin_item_img">
-								<img src="images/img1.jpg" />
-								<a href="#" class="details">查看详情</a>
-								<span class="scoreShow">90</span>
-							</div>
-							<div class="zuopin_item_img_bot">
-								<p >0000000</p>
-								<form action="#" method="post">
-									<input type="number" name="score" placeholder="0-80分" required/>
-									<input type="submit" class="postScore" value="确定"/>
-								</form>
-							</div>
-						</div>
-						
-						
-						
-					</div>
-				</div>				
-				
-				<!--分页-->
-				<div class="page page2">
-					<a href="#" class="prev">上一页</a>
-					<a href="#" class="pagecur">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<a href="#">5</a>
-					<a href="#">6</a>
-					<a href="#">7</a>
-					<a href="#">8</a>
-					<a>...</a>
-					<a href="#">200</a>
-					<a href="#" class="next">上一页</a>
-					<div class="topage">
-						到
-						<input type="text" />
-						页
-						<span>确定</span>
-					</div>
-				</div>
-				
-			</div>
 			
 		</div>
 		<div id="Pagination" class="meneame">
@@ -268,19 +151,21 @@
 <script type="text/javascript" src="images/index.js" ></script>
 
 <script>
+
+
 	$('#fyq').pagination({
     
 		dataSource: function(done){
 		var result = [];
-		for (var i = 1; i < {{ $total }}; i++) {
+		for (var i = 1; i <= {{ $total }}; i++) {
 			result.push(i);
 		}
 		done(result);
  },
 	pageSize:4,
 	pageNumber:{{ $page }},
-    // showPrevious: true,
-	// showNext: true,
+    showPrevious: false,
+	showNext: false,
 
 });
 
@@ -311,19 +196,24 @@ $(function(){
 			console.log(l);
             $(window).attr('location', "{{ $r_url }}?size=4&page="+a+"&group={{ Auth::user()->group_id }}&level="+l+"");
 		});
+		$(".J-paginationjs-page.active").css("background", "red");
 
 	});
 
 	var to_page ="<div class='paginationjs-go-input'><input id='to_page' type='text' name='page'></div>"
 	var to_button = "<button class='paginationjs-go-button' type='submit'>确定</button>"
-	$(".paginationjs-pages").append(to_page);
-	$(".paginationjs-pages").append(to_button);
-
-	$(".paginationjs-go-button").on("click", function(){
+	if({{ $total }} > 5) {
+		$(".paginationjs-pages").append(to_page);
+		$(".paginationjs-pages").append(to_button);
+		$(".paginationjs-go-button").on("click", function(){
 		var l = getUrlParam('level');
 		var a = $("#to_page").val();
 		$(window).attr('location', "{{ $r_url }}?size=4&page="+a+"&group={{ Auth::user()->group_id }}&level="+l+"");
 	})
+
+	}
+
+
 
 	$("#WorkdList").on("click","span.star",function(){
 		var _id=$(this).data("id");

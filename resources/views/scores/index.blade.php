@@ -5,6 +5,10 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<title>筛选和评分</title>
 		<link rel="stylesheet" type="text/css" href="images/index.css"/>
+		<script type="text/javascript" src="images/jquery-3.5.1.min.js" ></script>
+		<script type="text/javascript" src="js/layer/layer.js" ></script>
+		<script type="text/javascript" src="images/pagination.min.js" ></script>
+		<script type="text/javascript" src="images/index.js" ></script>
 	</head>
 	<body>
 		<!--顶部-->
@@ -44,7 +48,7 @@
 		
 		<!--导航-->
 		<div class="nav">
-			<span>初选平台</span>
+			<span> <a style="color:#BE0D0D" href="{{ route('check.pre') }}">初选平台</a></span>
 			<span class="nav_cur">评分平台</span>
 		</div>
 		
@@ -54,12 +58,22 @@
 			<!--评分平台-->
 			<div class="chuxuan ">
 				<hr class="pingfen_line" />
+
+				<div class="btn " style="float: left; margin: 20px 0 0 80px;">
+					<span class="r_cur" id="not_checked" @if($scored_status == 0)  style="color: white;background:#BE0D0D" @endif>未评分</span>
+					<span  class="r_cur" id="is_checked" @if($scored_status == 1)  style="color: white;background:#BE0D0D" @endif>已评分</span>
+				</div>
+				
+				<div class="btn" style="float: right; margin: 20px 0;">
+					<span class = "btn_over" onclick="submitScore()">确认评审完毕</span>
+					<span class = "btn_lock">查看评审结果</span>
+				</div>
 				<!--作品-->
 				<div class="zuopin">
-					<a href="#" class="prev1">上一页</a>
-					<a href="#" class="next1">下一页</a>
+					<a href="@if($page == 1) # @else{{ $pre_url }} @endif" class="prev1">上一页</a>
+					<a href="@if($page == $total_page) # @else{{ $next_url }} @endif" class="next1">下一页</a>
 					<div class="zuopin_main">
-{{--             
+            
                         @foreach ($works as $item)
 						<div class="zuopin_item pinfen_item">
 							<div class="zuopin_item_img">
@@ -68,39 +82,23 @@
 								<span class="scoreShow">90</span>
 							</div>
 							<div class="zuopin_item_img_bot">
-								<p >{{ $item['code'] }}</p>
-								<form action="#" method="post">
-									<input type="number" name="score" placeholder="0-80分" required/>
-									<input type="submit" class="postScore" value="确定"/>
-								</form>
+								<p >{{ $item['id'] }}</p>
+								<div style="float: right;display: inline;">
+									<input type="number" name="score" placeholder="@if($item['score']==-1)0-80分 @else{{ $item['score'] }} @endif" required />
+									<input type="submit" class="postScore pingfen" value="确定"/>
+									<input id="item_id" type="hidden" value="{{ $item['id'] }}" >
+								</div>
 							</div>
                         </div>
-                        @endforeach --}}
+                        @endforeach
 					
 						
 					</div>
 				</div>				
 				
 				<!--分页-->
-				<div class="page page2">
-					<a href="#" class="prev">上一页</a>
-					<a href="#" class="pagecur">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<a href="#">5</a>
-					<a href="#">6</a>
-					<a href="#">7</a>
-					<a href="#">8</a>
-					<a>...</a>
-					<a href="#">200</a>
-					<a href="#" class="next">上一页</a>
-					<div class="topage">
-						到
-						<input type="text" />
-						页
-						<span>确定</span>
-					</div>
+				<div id="fyq">
+
 				</div>
 				
 			</div>
@@ -108,22 +106,107 @@
 		</div>
 		<div id="Pagination" class="meneame">
 		</div>
-
-
-		<div class="showImg">
-			<img src="images/img1.jpg"/>
-		</div>
 	</body>
 </html>
 @if (app()->isLocal())
 @include('sudosu::user-selector')
 @endif
 
-<script type="text/javascript" src="images/jquery-3.5.1.min.js" ></script>
-<script type="text/javascript" src="images/pagination.min.js" ></script>
-<script type="text/javascript" src="images/index.js" ></script>
+
 
 <script>
+	$('#fyq').pagination({
+    
+	dataSource: function(done){
+	var result = [];
+	for (var i = 1; i <= {{ $total }}; i++) {
+		result.push(i);
+	}
+	done(result);
+},
+pageSize:4,
+pageNumber:{{ $page }},
+showPrevious: false,
+showNext: false,
+});
+
+submitScore = function (){
+
+	var con = confirm('你确认提交吗?提交后将不可更改。');
+	if (con == true) {
+		$.ajax({
+            type: "POST",
+            url: "{{ url('/score/confirm') }}",
+            dataType: 'json',
+			headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        	},
+            data: {
+				confirm_score:1
+            },
+            success: function (data) {
+               	if(data == 200){
+					   alert('确认成功 ！')
+				   }
+				if(data == 201){
+					   alert('评分未完成！')
+				   }
+				}
+			})
+		} 
+		;	
+
+	}
+
+
+function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+		if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+
+$(function() {
+	$(".J-paginationjs-page").click(function(){
+			var a = $(this).attr('data-num');
+			var s = getUrlParam('scored_status');
+            $(window).attr('location', "{{ $r_url }}?size=4&scored_status="+s+"&page="+a+"");
+		});
+
+	$(".J-paginationjs-page.active").css("background", "red");
+		
+	$("#is_checked").click(function(){
+			$(window).attr('location', "{{ $r_url }}?size=4&page=1&scored_status=1");
+		})
+
+		$("#not_checked").click(function(){
+			$(window).attr('location', "{{ $r_url }}?size=4&page=1&scored_status=0");
+		})
+
+		$(".pingfen").on("click",function(){
+		var _id=$(this).next().val();
+		var _score = $(this).prev().val();
+		$.ajax({
+            type: "POST",
+            url: "{{ url('/score') }}",
+            dataType: 'json',
+			headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        	},
+            data: {
+				id:_id,
+				score:_score
+            },
+            success: function (data) {
+               	if(data == 200){
+					layer.msg("投票成功！",{time:2000});
+				   }
+				}
+			})
+		});	
+
+
+})
+
 
 
 </script>
