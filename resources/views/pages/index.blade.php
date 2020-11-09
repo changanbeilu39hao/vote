@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		<title>筛选和评分</title>
+		<title>作品初选</title>
 		<link rel="stylesheet" type="text/css" href="images/index.css"/>
 	</head>
 	<body>
@@ -45,7 +45,7 @@
 		<!--导航-->
 		<div class="nav">
 			<span class="nav_cur">初选平台</span>
-			<span > <a style="color:#BE0D0D" href="{{ route('score.index') }}">评分平台 </a></span>
+			<a style="color:#BE0D0D" href="{{ route('score.index') }}"><span >评分平台</span> </a>
 		</div>
 		
 		<div class="main">
@@ -86,9 +86,9 @@
 						</form>
 
 						<span id="all_c" ><a  href="{{ route('check.pre') }}">全部作品</a></span>
-						<span id="sanxing_c" title="表示有三个人通过的作品"><a  href="{{ route('check.pre') }}?level=3&page=1&size=4">三星作品</a></span>
-						<span id="erxing_c" title="表示有二个人通过的作品"><a  href="{{ route('check.pre') }}?level=2&page=1&size=4">二星作品</a></span>
-						<span id="yixing_c" title="表示有一个人通过的作品"><a  href="{{ route('check.pre') }}?level=1&page=1&size=4">一星作品</a></span>
+						<a  href="{{ route('check.pre') }}?level=3&page=1&size=4"><span id="sanxing_c" title="表示有三个人通过的作品">三星作品</span></a>
+						<a  href="{{ route('check.pre') }}?level=2&page=1&size=4"><span id="erxing_c" title="表示有二个人通过的作品">二星作品</span></a>
+						<a  href="{{ route('check.pre') }}?level=1&page=1&size=4"><span id="yixing_c" title="表示有一个人通过的作品">一星作品</span></a>
 					</div>
 					
 					<div class="shaixuan_r">我已选作品: <span>{{ Session::get('user_count_'.Auth::user()->id) }}</span></div>
@@ -109,7 +109,7 @@
 								<span class="star @if ($item['status'] ==1 )star_fill @endif" data-id="{{ $item['id'] }}"></span>
 								<span class="realImg">查看原图</span>
 							</div>
-							<p class="zuopin_id">{{ $item['code'] }}</p>
+							<p class="zuopin_id">{{ $item['id'] }}</p>
 						</div>
 						@endforeach
 						{{-- <div class="zuopin_item">
@@ -250,10 +250,14 @@ $(function(){
 				if(data == 201){
 					alert('请确认此组三星作品为2000件！')
 				}
+				if(data == 202){
+					alert('请评审组长确认提交！');
+
+            	}
 				if(data == 200){
 					alert('作品确认成功 ！');
 					$(window).attr('location', "{{ $r_url }}");
-            }
+            	}
         }})
 	})
 

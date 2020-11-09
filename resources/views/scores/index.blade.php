@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		<title>筛选和评分</title>
+		<title>作品评分</title>
 		<link rel="stylesheet" type="text/css" href="images/index.css"/>
 		<script type="text/javascript" src="images/jquery-3.5.1.min.js" ></script>
 		<script type="text/javascript" src="js/layer/layer.js" ></script>
@@ -173,6 +173,20 @@ $(function() {
 		});
 
 	$(".J-paginationjs-page.active").css("background", "red");
+
+	var to_page ="<div class='paginationjs-go-input'><input id='to_page' type='text' name='page'></div>"
+	var to_button = "<button class='paginationjs-go-button' type='submit'>确定</button>"
+	if({{ $total_page }} > 5) {
+		$(".paginationjs-pages").append(to_page);
+		$(".paginationjs-pages").append(to_button);
+		$(".paginationjs-go-button").on("click", function(){
+		var l = getUrlParam('scored_status');
+		var a = $("#to_page").val();
+		$(window).attr('location', "{{ $r_url }}?size=4&page="+a+"&scored_status="+l+"");
+	})
+
+	}
+
 		
 	$("#is_checked").click(function(){
 			$(window).attr('location', "{{ $r_url }}?size=4&page=1&scored_status=1");
@@ -184,7 +198,10 @@ $(function() {
 
 		$(".pingfen").on("click",function(){
 		var _id=$(this).next().val();
-		var _score = $(this).prev().val();
+		var _score =parseInt($(this).prev().val());
+		if (_score<0||_score>80){
+			return layer.msg('请输入0-80的数字');
+		}
 		$.ajax({
             type: "POST",
             url: "{{ url('/score') }}",
@@ -198,7 +215,7 @@ $(function() {
             },
             success: function (data) {
                	if(data == 200){
-					layer.msg("投票成功！",{time:2000});
+					layer.msg("评分成功！",{time:2000});
 				   }
 				}
 			})

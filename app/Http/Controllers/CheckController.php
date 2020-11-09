@@ -118,7 +118,9 @@ class CheckController extends Controller
 
     public function pre(Request $request, $page=1, $size=4)
     {
+
         $group_id = Auth::user()->group_id;
+
         $inspected = DB::table('users')->where('id', Auth::user()->id)->where('group_id', $group_id)->where('inspected', 1)->first();
         if ($inspected !=null ) {
             throw new InvalidRequestException('此组已完成作品审查，请前往评分平台！');
@@ -200,7 +202,7 @@ class CheckController extends Controller
   
         }
     
-        $url = config('app.api_url');
+        $url = config('app.img_url');
         
         // 页码
         $r_url = route('check.pre');
@@ -255,6 +257,7 @@ class CheckController extends Controller
     public function pre_store(Request $request)
     {
         if ($request->ajax()){
+
             $id = $request->get('id');
             $query = DB::table('user_item')->where('user_id', Auth::user()->id)->where('item_id', $id)->first();
             
@@ -284,12 +287,18 @@ class CheckController extends Controller
             $group_id = DB::table('users')->where('id', $user_id)->value('group_id');
             $level_3_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1")))/3; 
 
-            if ($level_3_count == 2000) {
-                DB::table('users')->where('id', $user_id)->update(['inspected'=>1]);
-                return 200;
+            if(in_array(Auth::user()->id, [1,2,3]) ){
+                if ($level_3_count == config('app.level_3_count')) {
+                    DB::table('users')->where('id', $user_id)->update(['inspected'=>1]);
+                    return 200;
+                }else{
+                    return 201;
+                }
             }else{
-                return 201;
+                return 202;
             }
+
+
             
         }else{
             return false;

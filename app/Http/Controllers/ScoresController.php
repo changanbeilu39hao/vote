@@ -20,7 +20,7 @@ class ScoresController extends Controller
     public function index(Request $request, $size = 4, $page = 1, $scored_status = 0)
     {
         $finished_score = Auth::user()->is_scored;
-        $is_inspected = DB::table('users')->where('group_id', Auth::user()->inspected)->where('inspected', 1)->first();
+        $is_inspected = DB::table('users')->where('group_id', Auth::user()->group_id)->where('inspected', 1)->first();
         if ( $is_inspected == null) {
             throw new InvalidRequestException('您的当前组还未完成初选！');
         }
@@ -38,16 +38,17 @@ class ScoresController extends Controller
         if ($request->get('page') !=null && $size = $request->get('size') != null){
             $page = $request->get('page');
             $size = $request->get('size');
-            Session::put('user_page2_'.Auth::user()->id,  $page);
-        } else {
-            if (Session::get('user_page2_'.Auth::user()->id) != null){
-                $page = Session::get('user_page2_'.Auth::user()->id);
-                }
+            // Session::put('user_page2_'.Auth::user()->id,  $page);
         }
+        //  else {
+        //     if (Session::get('user_page2_'.Auth::user()->id) != null){
+        //         $page = Session::get('user_page2_'.Auth::user()->id);
+        //         }
+        // }
         $limit = ($page-1)*$size;
         
-        $api_url = 'http://192.168.9.125:8085/api/WorkApi/';
-        $img_url = 'https://aqjy.newssc.org';
+        $api_url = config('app.api_url').'/api/WorkApi/';
+        $img_url = config('app.img_url');
         $group_id = Auth::user()->group_id;
        
         $is_scored_items = DB::table('scores')->where('user_id', Auth::user()->id)->get('item_id')->map(function ($value) {
@@ -57,7 +58,7 @@ class ScoresController extends Controller
         if ($is_scored_items == null ){
             $works = DB::select("select DISTINCT a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1 AND a.item_id limit $limit,$size");
 
-            $total = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1 AND a.item_id "))); 
+            $total = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1 AND a.item_id ")))/3; 
         }else{
             $is_scored_item = [];
             foreach ($is_scored_items as $v) {
@@ -114,7 +115,6 @@ class ScoresController extends Controller
 
         $r_url = route('score.index');
         $total_page = ceil($total/$size);
- 
         $pre_page = $page - 1;
         $next_page = $page + 1;
         $pre_url = route('score.index')."?page=$pre_page&size=$size&scored_status=$scored_status";
@@ -156,5 +156,10 @@ class ScoresController extends Controller
         }else{
             return false;
         }
+    }
+
+    public function detail()
+    {
+        return view('scores.detail');
     }
 }
