@@ -287,7 +287,7 @@ class CheckController extends Controller
             $group_id = DB::table('users')->where('id', $user_id)->value('group_id');
             $level_3_count = count(array_map('get_object_vars', DB::select("select a.item_id from user_item a LEFT JOIN users b ON  a.user_id=b.id where b.group_id=$group_id AND (a.item_id) in (select item_id from user_item group by item_id having count(*) = 3) AND status = 1")))/3; 
 
-            if(in_array(Auth::user()->id, [1,2,3]) ){
+            if(in_array(Auth::user()->id, [1,4,7]) ){
                 if ($level_3_count == config('app.level_3_count')) {
                     DB::table('users')->where('id', $user_id)->update(['inspected'=>1]);
                     return 200;
