@@ -158,8 +158,17 @@ class ScoresController extends Controller
         }
     }
 
-    public function detail()
+    public function detail($id)
     {
-        return view('scores.detail');
+        $data = (array) json_decode(file_get_contents(config('app.api_url').'/api/WorkApi/'.$id));
+        $data = $data['data'];
+        $data->bigImage = config('app.img_url').$data->bigImage;
+        return view('scores.detail', compact('data'));
+    }
+
+    public function show()
+    {
+        
+        return ('scores.show');
     }
 }

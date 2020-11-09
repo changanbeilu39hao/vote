@@ -25,6 +25,9 @@ Route::get('/score', 'ScoresController@index')->name('score.index');
 Route::post('/score', 'ScoresController@store')->name('score.store');
 Route::post('/score/confirm', 'ScoresController@confirm')->name('score.confirm');
 
+Route::get('score/detail/{id}', 'ScoresController@detail')->name('score.detail');
+Route::get('score/show', 'ScoresController@show')->name('score.show');
+
 Auth::routes();
 Route::get('/', function(){
     return redirect(route('check.pre'));

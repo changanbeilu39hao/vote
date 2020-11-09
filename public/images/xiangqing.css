@@ -1,0 +1,287 @@
+@charset "gb2312";
+/*重置规则*/
+*{
+	margin: 0 ;padding: 0;
+}
+html,body{
+	width: 100%;height: 100%;color: #000;font-family: "微软雅黑",arial;
+}
+a{
+	text-decoration: none;color: #000;
+}
+ui,li{
+	list-style: none;
+}
+img{
+	border: none;
+}
+.clear{
+	clear: both;
+}
+p,h1,h2,h3,h4,h5,h6{
+	font-weight: normal;font-style: normal
+}
+input,textarea,select,option {
+	outline: none;
+}
+ul,li,p {
+	margin: 0;padding: 0;
+}
+
+/*顶部*/
+.top{
+	width: 100%;
+	height: 80px;
+	background: #003399;
+	font-size: 0;
+}
+.top_main{
+	width: 1200px;
+	height: 100%;
+	margin: 0 auto;
+}
+.top_main > div{
+	overflow: hidden;
+}
+.top_left{
+	float: left;
+}
+.logo{
+	width: 164px;
+	display: block;
+	height: 100%;
+	overflow: hidden;
+	float: left;
+}
+.logo img{
+	width: 30px;
+	height: auto;
+	display: block;
+	float: left;
+	margin-top: 30px;
+}
+.logo p{
+	font-size: 18px;
+	line-height: 80px;
+	float: left;
+	margin-left: 6px;
+	color: #fff;
+}
+.date{
+	display: block;
+	float: left;
+	margin-left: 20px;
+	font-size: 18px;
+	line-height: 80px;
+	color: #fff;
+}
+.top_right{
+	float: right;
+}
+.top_right span{
+	display: block;
+	float: right;
+	font-size: 18px;
+	line-height: 80px;
+	color: #fff;
+	padding: 0 10px;
+}
+.myUpload,.exit{
+	cursor: pointer;
+}
+.myUpload:hover{
+	color: #ff7f00;
+	font-weight: 600;
+}
+.exit:hover{
+	color: #ff7f00;
+	font-weight: 600;
+}
+
+/*banner*/
+.banner{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	font-size: 0;
+}
+.banner img{
+	width: 100%;
+	height: auto;
+}
+
+/*标题*/
+.title{
+	width: 1200px;
+	padding-bottom: 30px;
+	margin: 0 auto;
+	border-bottom: 1px solid #D7D7D7;
+	margin-top: 60px;
+	text-align: center;
+	font-size: 0;
+}
+.title span,.title p{
+	font-size: 36px;
+	font-weight: bold;
+	display: inline-block;
+}
+.title span{
+	color: #FF7F00;
+	margin-right: 10px;
+}
+.main{
+	width: 1200px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-top: 40px;
+	font-size: 0;
+}
+.main_img{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+.main_img img{
+	width: 800px;
+	height: 566px;
+	margin: 0 auto;
+	margin-bottom: 40px;
+	display: block;
+}
+
+.main_mse{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+.main_mse_item{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 20px 0;
+	border-bottom: 1px solid #D7D7D7;
+}
+.main_mse_item span{
+	font-size: 18px;
+	float: left;
+	text-align: right;
+	display: block;
+	width: 400px;
+	line-height: 36px;
+}
+.main_mse_item p{
+	width: 800px;
+	font-size: 18px;
+	line-height: 36px;
+	float: right;
+	padding: 0 40px;
+	box-sizing: border-box;
+	text-align: justify;
+}
+.main_mse_item:first-of-type{
+	border-top: 1px solid #D7D7D7;
+}
+.back{
+	padding: 0 30px;
+	background: #009900;
+	border-radius: 30px;
+	font-size: 18px;
+	line-height: 40px;
+	color: #fff;
+	text-align: center;
+	margin-top: 40px;
+	float: right;
+	cursor: pointer;
+}
+
+/*底部*/
+.foot{
+	width: 1000px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+	padding-bottom: 60px;
+	font-size: 0;
+	margin-top: 80px;
+}
+.foot_top{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	text-align: center;
+}
+.foot_top li{
+	margin: 0 5px;
+	display: inline-block;
+}
+.foot_top li a{
+	font-size: 14px;
+	color: #333;
+}
+.foot_top li a:hover{
+	text-decoration: underline;
+}
+.foot_top li:after{
+	content: "|";
+	color: #333;
+	font-size: 14px;
+	display: inline-block;
+	margin-left: 5px;
+}
+.foot_top li:last-of-type:after{
+	content: "";
+}
+.foot_bot{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	text-align: center;
+	margin-top: 10px;
+}
+.foot_bot li{
+	display: inline-block;
+	margin: 10px;
+}
+.foot_bot li img{
+	display: block;
+	width: 132px;
+	height: auto;
+	border: 1px solid #D7D7D7;
+}
+.foot p{
+	font-size: 14px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+/*展示图片*/
+.showImg{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+	background: #000;
+}
+.showImg img{
+	width: 100%;
+	height: auto;
+}
+.showImg span{
+	display: block;
+	width: 60px;
+	height: 60px;
+	font-size: 40px;
+	line-height: 50px;
+	font-weight: bold;
+	position: absolute;
+	right: 40px;
+	top: 40px;
+	color: #fff;
+	cursor: pointer;
+	border: 4px solid #fff;
+	border-radius: 50%;
+	text-align: center;
+}

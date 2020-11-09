@@ -78,7 +78,7 @@
 						<div class="zuopin_item pinfen_item">
 							<div class="zuopin_item_img">
 								<img src="{{ $item['samllImage'] }}" />
-								<a href="#" class="details">查看详情</a>
+								<a target="_blank" href="{{ route('score.detail',['id'=>$item['id']]) }}" class="details">查看详情</a>
 								<span class="scoreShow">90</span>
 							</div>
 							<div class="zuopin_item_img_bot">
