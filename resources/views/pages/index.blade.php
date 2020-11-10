@@ -29,9 +29,9 @@
 					
 					@case(0)
 					<select id="group_c">
-						<option value="1">小学1-3年级组</option>
-						<option value="2">小学4-6年级组</option>
-						<option value="3">初中组</option>
+						<option id="group1" value="1" >小学1-3年级组</option>
+						<option id="group2" value="2">小学4-6年级组</option>
+						<option id="group3" value="3">初中组</option>
 					</select>
 					@break
                     @default
@@ -52,7 +52,7 @@
 		<!--导航-->
 		<div class="nav">
 			<span class="nav_cur">初选平台</span>
-			<a style="color:#BE0D0D" href="{{ route('score.index') }}"><span >评分平台</span> </a>
+			@if(Auth::user()->group_id == 0) <a style="color:#BE0D0D" href="{{ route('score.show') }}"><span >评分进度</span></a>  @else <a style="color:#BE0D0D" href="{{ route('score.index') }}"><span >评分平台</span></a>@endif
 		</div>
 		
 		<div class="main">
@@ -130,14 +130,11 @@
 					</div>
 				</div>				
 				
-
-
 				<div id="fyq" >
 
 				</div>
 	
 			</div>
-			
 			
 		</div>
 		<div id="Pagination" class="meneame">
@@ -219,6 +216,18 @@ $(function(){
 		if("{{ Auth::user()->group_id }}" == 0){
 			$(".push").remove()
 			$(".star").remove()
+			$(".shaixuan_r").remove()
+
+			var l = getUrlParam('group_id');
+			if (l == 1){
+				$('#group1').attr("selected",true);
+			}
+			if (l == 2){
+				$('#group2').attr("selected",true);
+			}
+			if (l == 3){
+				$('#group3').attr("selected",true);
+			}
 		}
 })
 	var to_page ="<div class='paginationjs-go-input'><input id='to_page' type='text' name='page'></div>"

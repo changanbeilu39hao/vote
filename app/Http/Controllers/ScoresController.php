@@ -168,6 +168,6 @@ class ScoresController extends Controller
 
     public function show()
     {
-        return ('scores.show');
+        return view('scores.show');
     }
 }
