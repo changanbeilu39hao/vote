@@ -12,13 +12,19 @@ class ScoreTableSeeder extends Seeder
      */
     public function run()
     {
-    
-        for ($i=1; $i < 2001; $i++) {    
+
+    $arr = [1,2,3,10,11,12,13];
+
+        for ($i=1; $i < 2001; $i++) {  
+
+            for ($v=0; $v<7;$v++){
             DB::table('scores')->insert([
-                'user_id'=> 1,
-                'item_id'=>random_int(1,2000),
+                'user_id'=>$arr[$v] ,
+                'item_id'=>$i,
                 'score'=>random_int(1,80),
             ]);
+            }
+
         }
 
     }

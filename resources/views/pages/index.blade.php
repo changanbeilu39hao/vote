@@ -52,7 +52,7 @@
 		<!--导航-->
 		<div class="nav">
 			<span class="nav_cur">初选平台</span>
-			@if(Auth::user()->group_id == 0) <a style="color:#BE0D0D" href="{{ route('score.show') }}"><span >评分进度</span></a>  @else <a style="color:#BE0D0D" href="{{ route('score.index') }}"><span >评分平台</span></a>@endif
+			@if(Auth::user()->group_id == 0) <a target="_blank" style="color:#BE0D0D" href="{{ route('score.show') }}"><span >评分进度</span></a>  @else <a style="color:#BE0D0D" href="{{ route('score.index') }}"><span >评分平台</span></a>@endif
 		</div>
 		
 		<div class="main">
