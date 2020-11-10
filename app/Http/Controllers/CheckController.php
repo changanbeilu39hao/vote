@@ -118,8 +118,14 @@ class CheckController extends Controller
 
     public function pre(Request $request, $page=1, $size=4)
     {
-
-        $group_id = Auth::user()->group_id;
+        if(in_array(Auth::user()->id, [22,23,24])){
+            $group_id = $request->get('group_id');
+            if ($group_id == null){
+                $group_id = 1;
+            }
+        }else{
+            $group_id = Auth::user()->group_id;
+        }
 
         $inspected = DB::table('users')->where('id', Auth::user()->id)->where('group_id', $group_id)->where('inspected', 1)->first();
         if ($inspected !=null ) {

@@ -26,7 +26,14 @@
                     @case(3)
                     初中组
                     @break
-                    
+					
+					@case(0)
+					<select id="group_c">
+						<option value="1">小学1-3年级组</option>
+						<option value="2">小学4-6年级组</option>
+						<option value="3">初中组</option>
+					</select>
+					@break
                     @default
                         
                 @endswitch
@@ -198,8 +205,22 @@ $(function(){
 		});
 		$(".J-paginationjs-page.active").css("background", "red");
 
-	});
+		$('#group_c').on('change',function(){
+			var selectId = $('#group_c option:selected');
+			if(selectId.val()==1){
+				$(window).attr('location', "{{ $r_url }}?group_id=1");
+			}else if(selectId.val()==2){
+				$(window).attr('location', "{{ $r_url }}?group_id=2");
+	　　　　 }else if(selectId.val()==3){
+				$(window).attr('location', "{{ $r_url }}?group_id=3");
+			}
+		});
 
+		if("{{ Auth::user()->group_id }}" == 0){
+			$(".push").remove()
+			$(".star").remove()
+		}
+})
 	var to_page ="<div class='paginationjs-go-input'><input id='to_page' type='text' name='page'></div>"
 	var to_button = "<button class='paginationjs-go-button' type='submit'>确定</button>"
 	if({{ $total }} > 5) {
