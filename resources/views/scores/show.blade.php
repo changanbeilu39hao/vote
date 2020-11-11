@@ -32,13 +32,13 @@
 			<ul class="t_head_lists">
 				<li class="t_head_rank">排名</li>
 				<li>作品编号</li>
-				<li>zhuanjia01</li>
-				<li>zhuanjia02</li>
-				<li>zhuanjia03</li>
-				<li>zhuanjia10</li>
-				<li>zhuanjia11</li>
-				<li>zhuanjia12</li>
-				<li>zhuanjia13</li>
+				<li id="zj1">zhuanjia01</li>
+				<li id="zj2">zhuanjia02</li>
+				<li id="zj3">zhuanjia03</li>
+				<li id="zj4">zhuanjia10</li>
+				<li id="zj5">zhuanjia11</li>
+				<li id="zj6">zhuanjia12</li>
+				<li id="zj7">zhuanjia13</li>
 				<li class="t_head_lastSroce">最终得分</li>
 			</ul>
 		</div>
@@ -104,9 +104,23 @@
         }
         if (l==2){
             $("#x4").addClass('navcur');
+            $("#zj1").text('zhuanjia4')
+            $("#zj2").text('zhuanjia5')
+            $("#zj3").text('zhuanjia6')
+            $("#zj4").text('zhuanjia14')
+            $("#zj5").text('zhuanjia15')
+            $("#zj6").text('zhuanjia16')
+            $("#zj7").text('zhuanjia17')
         }
         if (l==3){
             $("#cz").addClass('navcur');
+            $("#zj1").text('zhuanjia7')
+            $("#zj2").text('zhuanjia8')
+            $("#zj3").text('zhuanjia9')
+            $("#zj4").text('zhuanjia18')
+            $("#zj5").text('zhuanjia19')
+            $("#zj6").text('zhuanjia20')
+            $("#zj7").text('zhuanjia21')
         }
     })
 </script>
