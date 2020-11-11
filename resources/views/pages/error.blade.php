@@ -6,8 +6,9 @@
     <div class="card-header">提示</div>
     <div class="card-body text-center">
         <h1>{{ $msg }}</h1>
-        <button class="btn btn-danger"><a style="color: white" href="{{ route('score.index') }}">评分平台</a></button>
-        <button class="btn btn-danger"><a>公示页面</a></button>
+        <a style="color: white" href="{{ route('check.pre') }}"><button class="btn btn-success">返回初选平台</button></a>
+        <a style="color: white" href="{{ route('score.index') }}"><button class="btn btn-danger">评分平台</button></a>
+        <a><button class="btn btn-danger">公示页面</button></a>
     </div>
 </div>
 @endsection

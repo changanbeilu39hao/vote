@@ -166,8 +166,15 @@ class ScoresController extends Controller
         return view('scores.detail', compact('data'));
     }
 
-    public function show()
+    public function show($group_id=1)
     {
+        if($group_id ==1 ){
+            $user_ids = DB::table('users')->where('group_id', 1)->get('id');
+
+
+            $data = DB::table('scores')->where();
+        }
+
         return view('scores.show');
     }
 }

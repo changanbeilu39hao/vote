@@ -196,10 +196,24 @@ class CheckController extends Controller
 
         }elseif ($request->get('search_id') != null){
             $search_id = (array) json_decode(file_get_contents(config('app.api_url')."/api/WorkApi/".$request->get('search_id')));
-            // dd($search_id);
-            $works[0] = (array)$search_id['data'];
-            $data['count'] = 2;
-           
+            
+            if (Auth::user()->group_id == 1){
+                $group_name = '小学1-3年级组';
+            }
+            if (Auth::user()->group_id == 2){
+                $group_name = '小学4-6年级组';
+            }
+            if (Auth::user()->group_id == 3){
+                $group_name = '初中组';
+            }
+
+            if($search_id['data']->groupType != $group_name){
+                throw new InvalidRequestException('未在该组找到该作品！');
+            } else {
+                $works[0] = (array)$search_id['data'];
+                $data['count'] = 2;
+            }
+
         }
         else{
             $data = file_get_contents(config('app.api_url')."/api/WorkApi/list?page=$page&size=$size&group=$group_id");
