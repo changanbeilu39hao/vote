@@ -4,7 +4,9 @@
 		<meta charset="UTF-8">
 		<title>评审结果</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('images/result.css') }}"/>
-		<script type="text/javascript" src="{{ asset('images/result.js') }}" ></script>
+        <script type="text/javascript" src="{{ asset('images/result.js') }}" ></script>
+        <script type="text/javascript" src="{{ asset('images/jquery-3.5.1.min.js') }}" ></script>
+
 	</head>
 	<body>
 		<!--顶部-->
@@ -19,90 +21,53 @@
 		
 		<!--导航-->
 		<div class="nav">
-			<span class="navcur">小学1-3年级组</span>
-			<span>小学4-6年级组</span>
-			<span>初中组</span>
+            <a href="{{ route('score.show',['group_id'=>1]) }}"><span id="x1">小学1-3年级组</span></a>
+            <a href="{{ route('score.show',['group_id'=>2]) }}"><span id="x4">小学4-6年级组</span></a>
+            <a href="{{ route('score.show',['group_id'=>3]) }}"><span id="cz">初中组</span></a>
 		</div>
-		
+        
+       
 		<!--表头-->
-		{{-- <div class="t_head">
+		<div class="t_head">
 			<ul class="t_head_lists">
 				<li class="t_head_rank">排名</li>
 				<li>作品编号</li>
 				<li>zhuanjia01</li>
 				<li>zhuanjia02</li>
 				<li>zhuanjia03</li>
-				<li>zhuanjia04</li>
-				<li>zhuanjia05</li>
-				<li>zhuanjia06</li>
-				<li>zhuanjia07</li>
+				<li>zhuanjia10</li>
+				<li>zhuanjia11</li>
+				<li>zhuanjia12</li>
+				<li>zhuanjia13</li>
 				<li class="t_head_lastSroce">最终得分</li>
 			</ul>
-		</div> --}}
+		</div>
 		
 		<!--得分详情-->
-		{{-- <div class="scoreDetails">
+		<div class="scoreDetails">
 			
 			<ul class="scoreDetails_lists">
-				<!--分数行-->
-				<li class="scoreDetails_list">
-					<span class="rank">1</span>
-					<span class="number"><a href="#" target="_blank">000000</a></span>
-					<span class="score">79</span>
-					<span class="score">76</span>
-					<span class="score">80</span>
-					<span class="score">51</span>
-					<span class="score">32</span>
-					<span class="score">74</span>
-					<span class="score">78</span>
-					<span class="last_score">00.00</span>
-				</li>
-				
-				<li class="scoreDetails_list">
-					<span class="rank">1</span>
-					<span class="number"><a href="#" target="_blank">000000</a></span>
-					<span class="score">22</span>
-					<span class="score">76</span>
-					<span class="score">68</span>
-					<span class="score">51</span>
-					<span class="score">79</span>
-					<span class="score">74</span>
-					<span class="score">78</span>
-					<span class="last_score">00.00</span>
-				</li>
+                <!--分数行--> 
+                @foreach ($d as $k=>$v)    
 
 				<li class="scoreDetails_list">
-					<span class="rank">1001</span>
-					<span class="number"><a href="#" target="_blank">000000</a></span>
-					<span class="score">79</span>
-					<span class="score">76</span>
-					<span class="score">80</span>
-					<span class="score">51</span>
-					<span class="score">79</span>
-					<span class="score">74</span>
-					<span class="score">78</span>
-					<span class="last_score">00.00</span>
+					<span class="rank">{{ $k+1 }}</span>
+					<span class="number"><a href="#" target="_blank">{{ $v['item_id'] }}</a></span>
+					<span class="score">{{ $v['z1'] }}</span>
+					<span class="score">{{ $v['z2'] }}</span>
+					<span class="score">{{ $v['z3'] }}</span>
+					<span class="score">{{ $v['z10'] }}</span>
+					<span class="score">{{ $v['z11'] }}</span>
+					<span class="score">{{ $v['z12'] }}</span>
+					<span class="score">{{ $v['z13'] }}</span>
+					<span class="last_score">{{ $v['last_score'] }}</span>
 				</li>
-				
-				<li class="scoreDetails_list">
-					<span class="rank">1002</span>
-					<span class="number"><a href="#" target="_blank">000000</a></span>
-					<span class="score">79</span>
-					<span class="score">38</span>
-					<span class="score">49</span>
-					<span class="score">51</span>
-					<span class="score">79</span>
-					<span class="score">74</span>
-					<span class="score">78</span>
-					<span class="last_score">00.00</span>
-				</li>
-				
-				
+                @endforeach
+                
 			</ul>
-
 		</div>
-		 --}}
-		
+		<br><br><br><br>
+
 		
 		<!--分页-->
 		{{-- <div class="page page2">
@@ -123,6 +88,26 @@
 				<input type="text" />
 				页
 				<span>确定</span>
-			</div> --}}
-	</body>
+		</div> --}}
+    </body>
+<script>
+    function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+		if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+    $(function () {
+        var l =getUrlParam('group_id')
+        console.log(l)
+        if (l==1){
+            $("#x1").addClass('navcur');
+        }
+        if (l==2){
+            $("#x4").addClass('navcur');
+        }
+        if (l==3){
+            $("#cz").addClass('navcur');
+        }
+    })
+</script>
 </html>

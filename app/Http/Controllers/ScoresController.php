@@ -166,15 +166,100 @@ class ScoresController extends Controller
         return view('scores.detail', compact('data'));
     }
 
-    public function show($group_id=1)
+    public function show(Request $request, $group_id=1)
     {
-        if($group_id ==1 ){
-            $user_ids = DB::table('users')->where('group_id', 1)->get('id');
 
-
-            $data = DB::table('scores')->where();
+        if(Auth::user()->is_score == 0){
+            if(Auth::user()->group_id != 0){
+                throw new InvalidRequestException('您还未完成评分！');
+            }
         }
 
-        return view('scores.show');
+        if($request->get('group_id') != null){
+            $group_id = $request->get('group_id');
+        }
+
+        if($group_id ==1 ){
+            $data =  DB::select("SELECT item_id,
+            MAX(IF(`user_id`=1,score,-1)) as 'z1',
+            MAX(IF(`user_id`=2,score,-1)) as 'z2',
+            MAX(IF(`user_id`=3,score,-1)) as 'z3',
+            MAX(IF(`user_id`=10,score,-1)) as 'z10',
+            MAX(IF(`user_id`=11,score,-1)) as 'z11',
+            MAX(IF(`user_id`=12,score,-1)) as 'z12',
+            MAX(IF(`user_id`=13,score,-1)) as 'z13' 
+            FROM scores 
+            GROUP BY item_id
+            ");
+        }
+
+
+        if($group_id ==2 ){
+            $data =  DB::select("SELECT item_id,
+            MAX(IF(`user_id`=4,score,-1)) as 'z1',
+            MAX(IF(`user_id`=5,score,-1)) as 'z2',
+            MAX(IF(`user_id`=6,score,-1)) as 'z3',
+            MAX(IF(`user_id`=14,score,-1)) as 'z10',
+            MAX(IF(`user_id`=15,score,-1)) as 'z11',
+            MAX(IF(`user_id`=16,score,-1)) as 'z12',
+            MAX(IF(`user_id`=17,score,-1)) as 'z13' 
+            FROM scores 
+            GROUP BY item_id
+            ");
+        }
+
+        if($group_id ==3 ){
+            $data =  DB::select("SELECT item_id,
+            MAX(IF(`user_id`=7,score,-1)) as 'z1',
+            MAX(IF(`user_id`=8,score,-1)) as 'z2',
+            MAX(IF(`user_id`=9,score,-1)) as 'z3',
+            MAX(IF(`user_id`=18,score,-1)) as 'z10',
+            MAX(IF(`user_id`=19,score,-1)) as 'z11',
+            MAX(IF(`user_id`=20,score,-1)) as 'z12',
+            MAX(IF(`user_id`=21,score,-1)) as 'z13' 
+            FROM scores 
+            GROUP BY item_id
+            ");
+        }
+
+
+        foreach ($data as $k=>$v) {
+            $data[$k]->last_score = 0;
+            $arr=[];
+            foreach ($v as $a=>$b){
+                if($a != 'item_id'){
+                    $arr[]=$b;
+                }
+                if($b == -1){
+                    $data[$k]->last_score = -1;
+        }
+    }
+
+       if ($data[$k]->last_score == 0){
+            $min = min($arr);
+            $max = max($arr);
+            $last_score = (array_sum($arr) - $min - $max)/7;
+            $data[$k]->last_score = round($last_score,2);
+       }
+
+    }
+
+    $a = [];
+    foreach($data as $k=>$v){
+        $a[] = $v->last_score; 
+    }
+
+    $d =[];
+    foreach ($data as $k=>$v) {
+    $m = [];
+        foreach ($v as $i=>$j) {
+        $m[$i] = $j;
+        }
+        $d[$k] = $m;
+    }
+    
+    array_multisort($a, SORT_DESC,$d);
+
+    return view('scores.show', compact('d'));
     }
 }
