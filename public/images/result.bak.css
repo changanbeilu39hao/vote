@@ -21,7 +21,7 @@ a{
 }
 
 
-/*顶部*/
+/*椤堕儴*/
 .top{
 	width: 100%;
 	height: 60px;
@@ -32,7 +32,7 @@ a{
 	text-align: center;
 }
 
-/*提示*/
+/*鎻愮ず*/
 .hint{
 	width: 780px;
 	padding: 20px;
@@ -91,11 +91,14 @@ a{
 }
 .t_head_lists li{
 	float: left;
-	width: 95px;
+	width: 120px;
 	text-align: center;
 }
-.t_head_lists .t_head_rank{
-	width: 50px;
+.t_head_rank,.rank{
+	width: 100px;
+}
+.t_head_lastSroce,.last_score{
+	width: 140px;
 }
 
 .scoreDetails{
@@ -136,21 +139,14 @@ a{
 .scoreDetails_list span{
 	display: block;
 	float: left;
-	width: 95px;
-}
-.scoreDetails_list span input{
-	width: 20px;
-	height: 20px;
-	margin-top: 8px;
-}
-.scoreDetails_list .rank{
-	width: 50px;
+	width: 120px;
 }
 .number a{ 
 	color: #1989d1; 
 }
 
-/*分页*/
+/*鍒嗛〉*/
+
 .page{
 	width: 100%;
 	text-align: center;

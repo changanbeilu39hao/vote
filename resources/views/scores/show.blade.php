@@ -39,7 +39,10 @@
 				<li id="zj5">zhuanjia11</li>
 				<li id="zj6">zhuanjia12</li>
 				<li id="zj7">zhuanjia13</li>
-				<li class="t_head_lastSroce">最终得分</li>
+                <li class="t_head_lastSroce">最终得分</li>
+                <li>四个文字</li>
+                <li>四个文字</li>
+                <li>四个文字</li>
 			</ul>
 		</div>
 		
@@ -60,7 +63,10 @@
 					<span class="score">{{ $v['z11'] }}</span>
 					<span class="score">{{ $v['z12'] }}</span>
 					<span class="score">{{ $v['z13'] }}</span>
-					<span class="last_score">{{ $v['last_score'] }}</span>
+                    <span class="last_score">{{ $v['last_score'] }}</span>
+                    <span><input type="checkbox"></span>
+                    <span><input type="checkbox"></span>
+                    <span><input type="checkbox"></span>
 				</li>
                 @endforeach
                 
@@ -99,7 +105,7 @@
     $(function () {
         var l =getUrlParam('group_id')
         console.log(l)
-        if (l==1){
+        if (l==1 || l==null){
             $("#x1").addClass('navcur');
         }
         if (l==2){

@@ -118,7 +118,7 @@ class CheckController extends Controller
 
     public function pre(Request $request, $page=1, $size=4)
     {
-        if(in_array(Auth::user()->id, [22,23,24,25,26])){
+        if(Auth::user()->id>21){
             $group_id = $request->get('group_id');
             if ($group_id == null){
                 $group_id = 1;
