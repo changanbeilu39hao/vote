@@ -92,7 +92,7 @@
 							<input type="submit" value="搜索" />
 						</form>
 
-						<span id="all_c" ><a  href="{{ route('check.pre') }}">全部作品</a></span>
+						<a  href="{{ route('check.pre') }}"><span id="all_c" >全部作品</span></a>
 						<a  href="{{ route('check.pre') }}?level=3&page=1&size=4"><span id="sanxing_c" title="表示有三个人通过的作品">三星作品</span></a>
 						<a  href="{{ route('check.pre') }}?level=2&page=1&size=4"><span id="erxing_c" title="表示有二个人通过的作品">二星作品</span></a>
 						<a  href="{{ route('check.pre') }}?level=1&page=1&size=4"><span id="yixing_c" title="表示有一个人通过的作品">一星作品</span></a>
