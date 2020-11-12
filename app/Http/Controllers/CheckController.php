@@ -255,13 +255,9 @@ class CheckController extends Controller
         Session::put('user_count_'.Auth::user()->id, $count_ids);
 
             foreach ($works as $k=>$v) {
-                if (strlen($v['samllImage']) > 90){
-                    $works[$k]['samllImage'] = str_replace(',', $url,strrchr($url.$v['samllImage'],',')) ; 
-                    $works[$k]['bigImage']   = str_replace(',', $url,strrchr($url.$v['bigImage'], ',')); 
-                } else {
+
                     $works[$k]['samllImage'] = $url.$v['samllImage']; 
                     $works[$k]['bigImage']   = $url.$v['bigImage']; 
-                }
                 
                 if(in_array($v['id'], $ids)){
                     $works[$k]['status'] = 1;

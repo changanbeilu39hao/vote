@@ -25,7 +25,7 @@ window.onload = function(){
 		}
 		score[max_i].className += " maxmin"
 		score[min_i].className += " maxmin"
-		console.log(max_i,min_i)
+		// console.log(max_i,min_i)
 	}
 	
 	function 	getmax(arr) {

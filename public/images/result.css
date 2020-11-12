@@ -113,7 +113,7 @@ a{
 .scoreDetails_list{
 	width: 100%;
 	height: 40px;
-	line-height: 40px;
+	line-height: 39px;
 	font-size: 16px;
 	text-align: center;
 	border-bottom: 1px solid #cbcbcb;
@@ -137,11 +137,18 @@ a{
 	display: block;
 	float: left;
 	width: 95px;
+	height: 39px;
+	position: relative;
 }
 .scoreDetails_list span input{
 	width: 20px;
 	height: 20px;
-	margin-top: 8px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
 }
 .scoreDetails_list .rank{
 	width: 50px;

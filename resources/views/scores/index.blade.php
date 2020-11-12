@@ -198,7 +198,7 @@ $(function() {
 
 		$(".pingfen").on("click",function(){
 		var _id=$(this).next().val();
-		var _score =parseInt($(this).prev().val());
+		var _score =$(this).prev().val();
 		if (_score<0||_score>80){
 			return layer.msg('请输入0-80的数字');
 		}
@@ -217,6 +217,9 @@ $(function() {
                	if(data == 200){
 					layer.msg("评分成功！",{time:2000});
 				   }
+				if(data == 201){
+				layer.msg("请输入整数或最多保留两位小数！",{time:2000});
+				}
 				}
 			})
 		});	

@@ -129,10 +129,16 @@ class ScoresController extends Controller
             $item_id = $request->get('id');
             $user_id = Auth::user()->id;
             $score = $request->get('score');
+            
+        if (preg_match('/^[0-9]+(.[0-9]{1,2})?$/', $score )) {
             DB::table('scores')->updateOrInsert(
                 ['user_id'=>$user_id, 'item_id'=>$item_id], 
                 ['score'=>$score],
                 );
+        }else{
+            return 201;
+        }
+
             return 200;
         }else{
             return false;
@@ -239,7 +245,7 @@ class ScoresController extends Controller
             $min = min($arr);
             $max = max($arr);
             $last_score = (array_sum($arr) - $min - $max)/7;
-            $data[$k]->last_score = round($last_score,2);
+            $data[$k]->last_score = round($last_score,3);
        }
 
     }
