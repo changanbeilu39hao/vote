@@ -31,10 +31,22 @@
 		</div>
 		
 		<!--正文-->
-		 <div class="main">
-			<div class="main_img">
+		<div class="main">
+		  <div class="main_img">
+			<div class="main_img_item">
 				<img src="{{ $data->bigImage }}"/>
-			</div>
+			
+
+				<!--旋转按钮-->
+				<div class="rotate_icon">
+					<span title = "右旋90°"><img src="{{ asset('images/plus_90.png') }}"/></span>
+					<span title = "左旋90°"><img src="{{ asset('images/min_90.png') }} "/></span>
+					<span title = "水平翻转"><img src="{{ asset('images/shuiping.png') }}"/></span>
+					<span title = "垂直翻转"><img src="{{ asset('images/chuizhi.png') }} "/></span>
+					<span title = "重置旋转"><img src="{{ asset('images/reset.png') }}"/></span>
+				</div>
+		    </div>
+		 </div>
 			
 			<div class="main_mse">
 				<div class="main_mse_item">
@@ -103,40 +115,79 @@
 			})()
 			
 			//顶部时间
-			var dateText = document.querySelector(".date");
-			var _date = new Date();
-			var year = _date.getFullYear();
-			var month = _date.getMonth();
-			var day = _date.getDate();
-			var weeks = _date.getDay();
-			var week = "";
+			// var dateText = document.querySelector(".date");
+			// var _date = new Date();
+			// var year = _date.getFullYear();
+			// var month = _date.getMonth();
+			// var day = _date.getDate();
+			// var weeks = _date.getDay();
+			// var week = "";
 			
-			switch(weeks){
-				case 1:week = "星期一" ; break;
-				case 2:week = "星期二" ; break;
-				case 3:week = "星期三" ; break;
-				case 4:week = "星期四" ; break;
-				case 5:week = "星期五" ; break;
-				case 6:week = "星期六" ; break;
-				case 0:week = "星期日" ; break;
+			// switch(weeks){
+			// 	case 1:week = "星期一" ; break;
+			// 	case 2:week = "星期二" ; break;
+			// 	case 3:week = "星期三" ; break;
+			// 	case 4:week = "星期四" ; break;
+			// 	case 5:week = "星期五" ; break;
+			// 	case 6:week = "星期六" ; break;
+			// 	case 0:week = "星期日" ; break;
+			// }
+			// dateText.innerText = year + "年" + month + "月" + day + "日"  + "  " + week;
+			
+			var rotate_icon = document.querySelectorAll('.rotate_icon span')
+			rotate_icon[0].onclick = function(){
+				// console.log(1)
+				rotate_method.call(this,90)
 			}
-			dateText.innerText = year + "年" + month + "月" + day + "日"  + "  " + week;
+			rotate_icon[1].onclick = function(){
+				rotate_method.call(this,-90)
+			}
+			rotate_icon[2].onclick = function(){
+				rotate_method.call(this,180,'Y')
+			}
+			rotate_icon[3].onclick = function(){
+				rotate_method.call(this,180,'X')
+			}
+			rotate_icon[4].onclick = function(){
+				this.parentNode.parentNode.children[0].style.transform = 'rotate(' + 0 + 'deg)'
+			}
 			
-			//点击查看大图
-			var main_img = document.querySelector(".main_img").children;
-			var showImg = document.querySelector(".showImg");
-			for(var i = 0; i < main_img.length; i++){
-				main_img[i].onclick = function (){
-					var img_url = this.getAttribute("src");
-					showImg.children[0].setAttribute("src",img_url);
-					showImg.style.display = "block";
+			// rotate_icon[5].onclick = function(){
+			// 	rotate_method.call(this,90)
+			// }
+			// rotate_icon[6].onclick = function(){
+			// 	rotate_method.call(this,-90)
+			// }
+			// rotate_icon[7].onclick = function(){
+			// 	rotate_method.call(this,180,'Y')
+			// }
+			// rotate_icon[8].onclick = function(){
+			// 	rotate_method.call(this,180,'X')
+			// }
+			// rotate_icon[9].onclick = function(){
+			// 	this.parentNode.parentNode.children[0].style.transform = 'rotate(' + 0 + 'deg)'
+			// }
+			
+			function rotate_method(deg,axis){
+				if(axis){
+					this.parentNode.parentNode.children[0].style.transform = 'rotate' + axis + '(' + deg + 'deg)'
+				}else{
+					this.parentNode.parentNode.children[0].style.transform = 'rotate(' + deg + 'deg)'
 				}
 			}
 			
-			//关闭大图显示
-			showImg.children[1].onclick = function () {
-				showImg.style.display = "none";
-			}
+			
+			// //点击查看大图
+			// var main_img_item = document.querySelectorAll(".main_img_item")
+			// var showImg = document.querySelector(".showImg")
+			// for(var i = 0; i < main_img_item.length; i++){
+			// 	main_img_item[i].children[0].onclick = function (){
+			// 		var img_url = this.getAttribute("src")
+			// 		showImg.children[0].setAttribute("src",img_url)
+			// 		showImg.style.display = "block"
+			// 	}
+			// }
+			
 		</script>
 	</body>
 </html>

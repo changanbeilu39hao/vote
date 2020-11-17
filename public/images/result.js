@@ -20,12 +20,9 @@ window.onload = function(){
 			scoreNum.push(score_n)
 			var max_i = getmax(scoreNum)
 			var min_i = getmin(scoreNum)
-			
-			
 		}
 		score[max_i].className += " maxmin"
 		score[min_i].className += " maxmin"
-		// console.log(max_i,min_i)
 	}
 	
 	function 	getmax(arr) {
@@ -62,4 +59,20 @@ window.onload = function(){
 			}
 		}
 	}
+	
+	
+	
+	$('.empty').click(function(){
+		var copystr = ''
+		for(var x= 0; x < $('.number').length; x++){
+			copystr += $('.number a').eq(x).text() +'\n'
+		}
+		var el = document.createElement('textarea')
+		$(el).text(copystr)
+	 	$('body').append(el)
+	 	el.select();
+	    document.execCommand("copy");
+	    $(el).remove()
+	    alert("已复制至剪切板")
+	})
 }

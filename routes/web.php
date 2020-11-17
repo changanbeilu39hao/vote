@@ -27,6 +27,10 @@ Route::post('/score/confirm', 'ScoresController@confirm')->name('score.confirm')
 
 Route::get('score/detail/{id}', 'ScoresController@detail')->name('score.detail');
 Route::get('score/show', 'ScoresController@show')->name('score.show');
+Route::get('score/last_score', 'ScoresController@last_score')->name('score.last');
+Route::post('score/last_score_choose', 'ScoresController@last_score_choose');
+Route::post('score/last_score_confirm', 'ScoresController@last_score_confirm');
+
 
 Auth::routes();
 Route::get('/', function(){

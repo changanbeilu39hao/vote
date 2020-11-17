@@ -175,8 +175,8 @@ class ScoresController extends Controller
     public function show(Request $request, $group_id=1)
     {
 
-        if(Auth::user()->is_score == 0){
-            if(Auth::user()->group_id != 0){
+        if(Auth::user()->is_scored == 0){
+            if(Auth::user()->group_id != 0 && Auth::user()->group_id != 4){
                 throw new InvalidRequestException('您还未完成评分！');
             }
         }
@@ -194,7 +194,7 @@ class ScoresController extends Controller
             MAX(IF(`user_id`=11,score,-1)) as 'z11',
             MAX(IF(`user_id`=12,score,-1)) as 'z12',
             MAX(IF(`user_id`=13,score,-1)) as 'z13' 
-            FROM scores 
+            FROM scores WHERE item_id<2001
             GROUP BY item_id
             ");
         }
@@ -209,7 +209,7 @@ class ScoresController extends Controller
             MAX(IF(`user_id`=15,score,-1)) as 'z11',
             MAX(IF(`user_id`=16,score,-1)) as 'z12',
             MAX(IF(`user_id`=17,score,-1)) as 'z13' 
-            FROM scores 
+            FROM scores WHERE item_id>2000 AND item_id<4001
             GROUP BY item_id
             ");
         }
@@ -223,11 +223,12 @@ class ScoresController extends Controller
             MAX(IF(`user_id`=19,score,-1)) as 'z11',
             MAX(IF(`user_id`=20,score,-1)) as 'z12',
             MAX(IF(`user_id`=21,score,-1)) as 'z13' 
-            FROM scores 
+            FROM scores WHERE item_id>4000 
             GROUP BY item_id
             ");
         }
 
+        // dd($data);
 
         foreach ($data as $k=>$v) {
             $data[$k]->last_score = 0;
@@ -240,12 +241,13 @@ class ScoresController extends Controller
                     $data[$k]->last_score = -1;
         }
     }
-
+    
        if ($data[$k]->last_score == 0){
+            unset($arr[7]);
             $min = min($arr);
             $max = max($arr);
             $last_score = (array_sum($arr) - $min - $max)/7;
-            $data[$k]->last_score = round($last_score,3);
+            $data[$k]->last_score = round($last_score, 3);
        }
 
     }
@@ -265,7 +267,116 @@ class ScoresController extends Controller
     }
     
     array_multisort($a, SORT_DESC,$d);
+    
 
+    // foreach ($d as $v){
+    //     DB::table('last_scores')->insert([
+    //         'item_id' => $v['item_id'],
+    //         'z1'=>$v['z1'],
+    //         'z2'=>$v['z2'],
+    //         'z3'=>$v['z3'],
+    //         'z4'=>$v['z10'],
+    //         'z5'=>$v['z11'],
+    //         'z6'=>$v['z12'],
+    //         'z7'=>$v['z13'],
+    //         'last_score'=>$v['last_score'],
+    //         'group_id'=>$group_id
+
+    //     ]);
+    // }
+    
     return view('scores.show', compact('d'));
+
+    }
+
+    public function last_score(Request $request, $group_id=1)
+    {
+
+        if ( Auth::user()->group_id !=4) {
+            throw new InvalidRequestException('请终审评委进入终审阶段！');
+        }
+
+        if($request->get('group_id') != null){
+            $group_id = $request->get('group_id');
+        }
+
+        if ($group_id == 1) {
+            $data = DB::select('select * from last_scores where group_id=1 order by (last_score+0) DESC');
+        }
+        if ($group_id == 2) {
+            $data = DB::select('select * from last_scores where group_id=2 order by (last_score+0) DESC');
+        }
+        
+        if ($group_id == 3) {
+            $data = DB::select('select * from last_scores where group_id=3 order by (last_score+0) DESC');
+        }
+        
+        
+        
+        $true_ids = DB::table('user_last_score')->where('user_id', Auth::user()->id)->where('status', 1)->get('item_id');
+
+        $false_ids = DB::table('user_last_score')->where('user_id', Auth::user()->id)->where('status', 2)->get('item_id');
+
+        $a=[];
+        $b=[];
+        foreach($true_ids as $v){
+            $a[]=$v->item_id;
+        }
+
+        foreach($false_ids as $v){
+            $b[]=$v->item_id;
+        }
+
+        switch (Auth::user()->id) {
+            case 30:
+                $user2=31;
+                $user3=32;
+                break;
+            case 31:
+                $user2=30;
+                $user3=32;
+                break;
+            case 32:
+                $user2=30;
+                $user3=31;
+                break;    
+        }
+
+        foreach($data as $k=>$v){
+            $data[$k]->status2 =  DB::table('user_last_score')->where('user_id',$user2)->where('item_id',$v->item_id)->value('status');
+            $data[$k]->status3 =  DB::table('user_last_score')->where('user_id',$user3)->where('item_id',$v->item_id)->value('status');
+            if (in_array($v->item_id, $a)){
+                $data[$k]->status = 1;
+            }elseif(in_array($v->item_id, $b)){
+                $data[$k]->status = 2;
+            }
+            else{
+                $data[$k]->status = 0;
+            }
+        }
+
+  
+        return view('scores.last', compact('data'));
+    }
+
+    public function last_score_choose(Request $request)
+    {
+        if ($request->ajax()){
+            DB::table('user_last_score')->updateOrInsert(
+                [
+                    'user_id'=>$request->get('user_id'),
+                    'item_id'=>$request->get('item_id')],
+                [
+                    'status'=>$request->get('status')
+                ]);
+
+        }else{
+            return false;
+        }
+    }
+
+    public function last_score_confirm()
+    {
+
     }
 }

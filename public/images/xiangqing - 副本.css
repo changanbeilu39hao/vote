@@ -1,10 +1,10 @@
 @charset "gb2312";
-/*é‡ç½®è§„åˆ™*/
+/*ÖØÖÃ¹æÔò*/
 *{
 	margin: 0 ;padding: 0;
 }
 html,body{
-	width: 100%;height: 100%;color: #000;font-family: "å¾®è½¯é›…é»‘",arial;
+	width: 100%;height: 100%;color: #000;font-family: "Î¢ÈíÑÅºÚ",arial;
 }
 a{
 	text-decoration: none;color: #000;
@@ -28,7 +28,7 @@ ul,li,p {
 	margin: 0;padding: 0;
 }
 
-/*é¡¶éƒ¨*/
+/*¶¥²¿*/
 .top{
 	width: 100%;
 	height: 80px;
@@ -110,7 +110,7 @@ ul,li,p {
 	height: auto;
 }
 
-/*æ ‡é¢˜*/
+/*±êÌâ*/
 .title{
 	width: 1200px;
 	padding-bottom: 30px;
@@ -141,50 +141,13 @@ ul,li,p {
 	width: 100%;
 	height: auto;
 	overflow: hidden;
-	margin-bottom: 40px;
 }
-.main_img_item{
-	/*ç¼©ç•¥å›¾å°ºå¯¸*/
-	width: 1056px;
-	height: 748px;
+.main_img img{
+	width: 800px;
+	height: 566px;
 	margin: 0 auto;
-	margin-bottom: 20px;
-	position: relative;
-}
-.main_img_item img{
-	width: 100%;
-	height: 100%;
+	margin-bottom: 40px;
 	display: block;
-}
-.rotate_icon{
-	width: 100%;
-	height: 40px;
-	position: absolute;
-	bottom: 10px;
-	text-align: center;
-	font-size: 0;
-}
-.rotate_icon span{
-	display: inline-block;
-	width: 40px;
-	height: 100%;
-	border-radius: 50%;
-	overflow: hidden;
-	margin: 0 5px;
-	background: #fff;
-	position: relative;
-	cursor: pointer;
-}
-.rotate_icon span img{
-	width: 80%;
-	height: auto;
-	display: block;
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0;
-	margin: auto;
 }
 
 .main_mse{
@@ -232,7 +195,7 @@ ul,li,p {
 	cursor: pointer;
 }
 
-/*åº•éƒ¨*/
+/*µ×²¿*/
 .foot{
 	width: 1000px;
 	height: auto;
@@ -292,7 +255,7 @@ ul,li,p {
 	margin-top: 10px;
 }
 
-/*å±•ç¤ºå›¾ç‰‡*/
+/*Õ¹Ê¾Í¼Æ¬*/
 .showImg{
 	width: 100%;
 	height: 100%;
@@ -301,19 +264,12 @@ ul,li,p {
 	top: 0;
 	display: none;
 	background: #000;
-	overflow: hidden;
 }
 .showImg img{
-	width: auto;
-	height: 100%;
-	position: absolute;
-	left: 0;
-	top:0;
-	bottom: 0;
-	right: 0;
-	margin: auto;
+	width: 100%;
+	height: auto;
 }
-.showImg>span:nth-of-type(1){
+.showImg span{
 	display: block;
 	width: 60px;
 	height: 60px;

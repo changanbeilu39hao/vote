@@ -2,11 +2,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<title>评审结果</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('images/result.css') }}"/>
         <script type="text/javascript" src="{{ asset('images/result.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('images/jquery-3.5.1.min.js') }}" ></script>
-
 	</head>
 	<body>
 		<!--顶部-->
@@ -40,9 +39,6 @@
 				<li id="zj6">zhuanjia12</li>
 				<li id="zj7">zhuanjia13</li>
                 <li class="t_head_lastSroce">最终得分</li>
-                <li>四个文字</li>
-                <li>四个文字</li>
-                <li>四个文字</li>
 			</ul>
 		</div>
 		
@@ -63,10 +59,7 @@
 					<span class="score">{{ $v['z11'] }}</span>
 					<span class="score">{{ $v['z12'] }}</span>
 					<span class="score">{{ $v['z13'] }}</span>
-                    <span class="last_score">{{ $v['last_score'] }}</span>
-                    <span><input type="checkbox"></span>
-                    <span><input type="checkbox"></span>
-                    <span><input type="checkbox"></span>
+					<span class="last_score">{{ $v['last_score'] }}</span>
 				</li>
                 @endforeach
                 
@@ -74,27 +67,7 @@
 		</div>
 		<br><br><br><br>
 
-		
-		<!--分页-->
-		{{-- <div class="page page2">
-			<a href="#" class="prev">上一页</a>
-			<a href="#" class="pagecur">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">4</a>
-			<a href="#">5</a>
-			<a href="#">6</a>
-			<a href="#">7</a>
-			<a href="#">8</a>
-			<a>...</a>
-			<a href="#">200</a>
-			<a href="#" class="next">上一页</a>
-			<div class="topage">
-				到
-				<input type="text" />
-				页
-				<span>确定</span>
-		</div> --}}
+        <div class="empty"></div>
     </body>
 <script>
     function getUrlParam(name) {
@@ -128,6 +101,10 @@
             $("#zj6").text('zhuanjia20')
             $("#zj7").text('zhuanjia21')
         }
-    })
+	})
+	
 </script>
 </html>
+@if (app()->isLocal())
+@include('sudosu::user-selector')
+@endif
