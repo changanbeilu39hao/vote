@@ -208,7 +208,7 @@ class ScoresController extends Controller
             MAX(IF(`user_id`=15,score,-1)) as 'z10',
             MAX(IF(`user_id`=16,score,-1)) as 'z11',
             MAX(IF(`user_id`=17,score,-1)) as 'z12' ,
-            MAX(IF(`user_id`=33,score,-1)) as 'z13',
+            MAX(IF(`user_id`=33,score,-1)) as 'z13'
             FROM scores WHERE item_id>2000 AND item_id<4001
             GROUP BY item_id
             ");
