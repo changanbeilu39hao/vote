@@ -84,19 +84,19 @@
         }
         if (l==2){
             $("#x4").addClass('navcur');
-            $("#zj1").text('zhuanjia33')
-            $("#zj2").text('zhuanjia5')
-            $("#zj3").text('zhuanjia6')
-            $("#zj4").text('zhuanjia14')
-            $("#zj5").text('zhuanjia15')
-            $("#zj6").text('zhuanjia16')
-            $("#zj7").text('zhuanjia17')
+            $("#zj1").text('zhuanjia05')
+            $("#zj2").text('zhuanjia06')
+            $("#zj3").text('zhuanjia14')
+            $("#zj4").text('zhuanjia15')
+            $("#zj5").text('zhuanjia16')
+            $("#zj6").text('zhuanjia17')
+			$("#zj7").text('zhuanjia33')
         }
         if (l==3){
             $("#cz").addClass('navcur');
-            $("#zj1").text('zhuanjia7')
-            $("#zj2").text('zhuanjia8')
-            $("#zj3").text('zhuanjia9')
+            $("#zj1").text('zhuanjia07')
+            $("#zj2").text('zhuanjia08')
+            $("#zj3").text('zhuanjia09')
             $("#zj4").text('zhuanjia18')
             $("#zj5").text('zhuanjia19')
             $("#zj6").text('zhuanjia20')

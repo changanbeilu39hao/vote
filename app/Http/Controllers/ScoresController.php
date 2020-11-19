@@ -202,13 +202,13 @@ class ScoresController extends Controller
 
         if($group_id ==2 ){
             $data =  DB::select("SELECT item_id,
-            MAX(IF(`user_id`=33,score,-1)) as 'z1',
-            MAX(IF(`user_id`=5,score,-1)) as 'z2',
-            MAX(IF(`user_id`=6,score,-1)) as 'z3',
-            MAX(IF(`user_id`=14,score,-1)) as 'z10',
-            MAX(IF(`user_id`=15,score,-1)) as 'z11',
-            MAX(IF(`user_id`=16,score,-1)) as 'z12',
-            MAX(IF(`user_id`=17,score,-1)) as 'z13' 
+            MAX(IF(`user_id`=5,score,-1)) as 'z1',
+            MAX(IF(`user_id`=6,score,-1)) as 'z2',
+            MAX(IF(`user_id`=14,score,-1)) as 'z3',
+            MAX(IF(`user_id`=15,score,-1)) as 'z10',
+            MAX(IF(`user_id`=16,score,-1)) as 'z11',
+            MAX(IF(`user_id`=17,score,-1)) as 'z12' ,
+            MAX(IF(`user_id`=33,score,-1)) as 'z13',
             FROM scores WHERE item_id>2000 AND item_id<4001
             GROUP BY item_id
             ");
