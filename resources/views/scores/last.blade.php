@@ -16,7 +16,7 @@
 		<!--提示消息-->
 		<div class="hint">
 			<p>提示：</p>
-			<span>1.最终得分 =（总分 - 最高分 - 最低分）/ 7</span>
+			<span>1.最终得分 =（总分 - 最高分 - 最低分）/ 5</span>
 			<span>2.每组得分排前1000名的作品进入网络投票环节</span>
 		</div>
 		
@@ -152,6 +152,7 @@
 				<span>确定</span>
         </div> --}}
         <div class="empty"></div>
+        <div style="text-align: center;"><button style="margin-bottom:20px;width:60px;height:30px" class="btn btn-danger" id="confirm">确认结果</button></div>
     </body>
 <script>
     function getUrlParam(name) {
@@ -167,7 +168,7 @@
         }
         if (l==2){
             $("#x4").addClass('navcur');
-            $("#zj1").text('zhuanjia4')
+            $("#zj1").text('zhuanjia33')
             $("#zj2").text('zhuanjia5')
             $("#zj3").text('zhuanjia6')
             $("#zj4").text('zhuanjia14')
@@ -227,7 +228,38 @@
 				})
 			$(this).addClass('yn_cur1').siblings('i').removeClass('yn_cur2')
 		}
-	})
+    })
+    
+    //确认结果
+    $('#confirm').click(function(){
+        var con = confirm('你确认提交吗?提交后将不可更改。');
+        if (con == true) {
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/score/last_score_confirm') }}",
+                dataType: 'json',
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    confirm_score:1
+                },
+                success: function (data) {
+                    if (data == 200){
+                        alert('确认成功!')
+                    }else{
+                        var one = data[0]
+                        var two = data[1]
+                        var three = data[2]
+                        var info = "小学生1-3年级组："+one+"件\n小学生4-6年级组："+two+"件\n初中组："+three+"件\n请确定每组三个勾的作品为1000件"
+                        alert(info)
+                    }
+                    
+                    }
+                })
+            } 
+            ;	
+        })
 </script>
 </html>
 @if (app()->isLocal())

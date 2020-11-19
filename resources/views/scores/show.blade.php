@@ -5,6 +5,7 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<title>评审结果</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('images/result.css') }}"/>
+		<script type="text/javascript" src="{{ asset('images/jquery-3.5.1.min.js') }}" ></script>
         <script type="text/javascript" src="{{ asset('images/result.js') }}" ></script>
 	</head>
 	<body>
@@ -14,7 +15,7 @@
 		<!--提示消息-->
 		<div class="hint">
 			<p>提示：</p>
-			<span>1.最终得分 =（总分 - 最高分 - 最低分）/ 7</span>
+			<span>1.最终得分 =（总分 - 最高分 - 最低分）/ 5</span>
 			<span>2.每组得分排前1000名的作品进入网络投票环节</span>
 		</div>
 		
@@ -51,7 +52,7 @@
 
 				<li class="scoreDetails_list">
 					<span class="rank">{{ $k+1 }}</span>
-					<span class="number"><a href="#" target="_blank">{{ $v['item_id'] }}</a></span>
+					<span class="number"><a href="{{ route('score.detail',['id'=>$v['item_id']]) }}" target="_blank">{{ $v['item_id'] }}</a></span>
 					<span class="score">{{ $v['z1'] }}</span>
 					<span class="score">{{ $v['z2'] }}</span>
 					<span class="score">{{ $v['z3'] }}</span>
@@ -83,7 +84,7 @@
         }
         if (l==2){
             $("#x4").addClass('navcur');
-            $("#zj1").text('zhuanjia4')
+            $("#zj1").text('zhuanjia33')
             $("#zj2").text('zhuanjia5')
             $("#zj3").text('zhuanjia6')
             $("#zj4").text('zhuanjia14')

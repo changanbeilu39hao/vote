@@ -202,7 +202,7 @@ class ScoresController extends Controller
 
         if($group_id ==2 ){
             $data =  DB::select("SELECT item_id,
-            MAX(IF(`user_id`=4,score,-1)) as 'z1',
+            MAX(IF(`user_id`=33,score,-1)) as 'z1',
             MAX(IF(`user_id`=5,score,-1)) as 'z2',
             MAX(IF(`user_id`=6,score,-1)) as 'z3',
             MAX(IF(`user_id`=14,score,-1)) as 'z10',
@@ -246,7 +246,7 @@ class ScoresController extends Controller
             unset($arr[7]);
             $min = min($arr);
             $max = max($arr);
-            $last_score = (array_sum($arr) - $min - $max)/7;
+            $last_score = (array_sum($arr) - $min - $max)/5;
             $data[$k]->last_score = round($last_score, 3);
        }
 
@@ -375,8 +375,30 @@ class ScoresController extends Controller
         }
     }
 
-    public function last_score_confirm()
+    public function last_score_confirm(Request $request)
     {
 
+        if ($request->ajax()){
+            $one = DB::select(' SELECT u.item_id count  FROM user_last_score u LEFT JOIN last_scores l on u.item_id = l.item_id where u.status = 1 AND l.group_id=1 GROUP BY u.item_id HAVING count(*)>2');
+            $count_1 = count($one);
+
+            $two = DB::select(' SELECT u.item_id count  FROM user_last_score u LEFT JOIN last_scores l on u.item_id = l.item_id where u.status = 1 AND l.group_id=2 GROUP BY u.item_id HAVING count(*)>2');
+            $count_2 = count($two);
+
+            $three = DB::select(' SELECT u.item_id count  FROM user_last_score u LEFT JOIN last_scores l on u.item_id = l.item_id where u.status = 1 AND l.group_id=3 GROUP BY u.item_id HAVING count(*)>2');
+            $count_3 = count($three);
+
+            if ($count_1!=1000 && $count_2!=1000 && $count_3!=1000){
+                $count = [$count_1, $count_2, $count_3];
+          
+                return json_encode($count,true);
+            }else{
+                return 200;
+            }
+            
+
+        }else{
+            return false;
+        }
     }
 }
