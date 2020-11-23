@@ -11,7 +11,13 @@
 	</head>
 	<body>
 		<!--顶部-->
-		<div class="top">四川森林草原防灭火安全教育手抄报征集活动评审结果</div>
+		<div class="top">
+			<p>四川森林草原防灭火安全教育手抄报征集活动评审结果</p>
+			<div class="top_right">
+				<span>用户名</span>
+				<a href="#">退出登录</a>
+			</div>
+		</div>
 					
 		<!--提示消息-->
 		<div class="hint">

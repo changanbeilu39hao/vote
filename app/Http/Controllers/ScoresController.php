@@ -284,7 +284,57 @@ class ScoresController extends Controller
 
     //     ]);
     // }
+
+    if(Auth::user()->group_id != 4){
+        return view('scores.show', compact('d'));
+    }
+
+
+    $true_ids = DB::table('user_last_score')->where('user_id', Auth::user()->id)->where('status', 1)->get('item_id');
+
+    $false_ids = DB::table('user_last_score')->where('user_id', Auth::user()->id)->where('status', 2)->get('item_id');
+
+    $a=[];
+    $b=[];
+    foreach($true_ids as $v){
+        $a[]=$v->item_id;
+    }
+
+    foreach($false_ids as $v){
+        $b[]=$v->item_id;
+    }
     
+    switch (Auth::user()->id) {
+        case 30:
+            $user2=31;
+            $user3=32;
+            break;
+        case 31:
+            $user2=30;
+            $user3=32;
+            break;
+        case 32:
+            $user2=30;
+            $user3=31;
+            break;    
+    }
+    foreach($d as $k=>$v) {      
+        $d[$k]['status2'] =  DB::table('user_last_score')->where('user_id',$user2)->where('item_id',$v['item_id'])->value('status');
+        $d[$k]['status3'] =  DB::table('user_last_score')->where('user_id',$user3)->where('item_id', $v['item_id'])->value('status');
+        if (in_array($v['item_id'], $a)){
+            $d[$k]['status'] = 1;
+        }elseif(in_array($v['item_id'], $b)){
+            $d[$k]['status'] = 2;
+        }
+        else{
+            $d[$k]['status'] = 0;
+        }
+        if ($v['last_score'] == -1){
+            unset($d[$k]);
+        }
+
+    }
+
     return view('scores.show', compact('d'));
 
     }

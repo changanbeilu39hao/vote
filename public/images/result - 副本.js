@@ -4,20 +4,20 @@ window.onload = function(){
 	var nav = document.querySelectorAll(".nav span")
 	addcalss(nav, " navcur")
 
-	// addRank()
-	// function addRank(){
-	// 	var rank = document.querySelectorAll(".rank")
-	// 	for(var i = 0; i < rank.length; i++){
-	// 		//遍历排名序号
-	// 		rank[i].innerText = i+1
-	// 		var rank_num = parseInt( rank[i].innerText )
-	// 		//前1000名添加背景
-	// 		if( rank_num <= 1000 && !rank[i].parentNode.classList.contains('BgColor') ){
-	// 			rank[i].parentNode.className += " BgColor"
-	// 			rank[i].className += " blodFont"
-	// 		}
-	// 	}
-	// }
+	addRank()
+	function addRank(){
+		var rank = document.querySelectorAll(".rank")
+		for(var i = 0; i < rank.length; i++){
+			//遍历排名序号
+			rank[i].innerText = i+1
+			var rank_num = parseInt( rank[i].innerText )
+			//前1000名添加背景
+			if( rank_num <= 1000 && !rank[i].parentNode.classList.contains('BgColor') ){
+				rank[i].parentNode.className += " BgColor"
+				rank[i].className += " blodFont"
+			}
+		}
+	}
 	
 	for(var i = 0; i < rank.length; i++){
 		var rank_num = parseInt( rank[i].innerText )
