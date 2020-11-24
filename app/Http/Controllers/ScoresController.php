@@ -169,6 +169,7 @@ class ScoresController extends Controller
         $data = (array) json_decode(file_get_contents(config('app.api_url').'/api/WorkApi/'.$id));
         $data = $data['data'];
         $data->bigImage = config('app.img_url').$data->bigImage;
+        // dd($data);
         return view('scores.detail', compact('data'));
     }
 

@@ -50,13 +50,17 @@
 			
 			<div class="main_mse">
 				<div class="main_mse_item">
+					<span>作品名称:</span>
+					<p>{{ $data->name }}</p>
+				</div>
+				<div class="main_mse_item">
+					<span>作品简介:</span>
+					<p>{{ $data->remark }}</p>
+				</div>
+				<div class="main_mse_item">
 					<span>作品组别:</span>
 					<p>{{ $data->groupType }}</p>
 				</div>
-				{{-- <div class="main_mse_item">
-					<span>作品简介:</span>
-					<p>《方案》明确，探索建设天基智能卫星互联网，拓展“卫星+智慧城市”“卫星+安全服务”等应用服务能力。实施“星河”智能卫星互联网建设重大工程，建设人工智能（AI）卫星总装工厂、地基AI卫星运控网、卫星网络应用服务平台等，构建支持巨型星座式星群管控任务的地面测运控网络，打造通导遥一体化空间信息大数据中心，具备提供覆盖全球的分钟级对地观测和影像数据安全共享能力。</p>
-				</div> --}}
 				<div class="main_mse_item">
 					<span>市(州)、县(市、区):</span>
 					<p>{{ $data->areaName }}</p>
