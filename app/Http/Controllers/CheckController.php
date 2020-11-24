@@ -118,12 +118,13 @@ class CheckController extends Controller
 
     public function pre(Request $request, $page=1, $size=4)
     {
-        if(Auth::user()->group_id == 4 || Auth::user()->group_id == 0) {
+        if(Auth::user()->group_id == 4) {
             return redirect('/score/show');
-        }else{
-            return redirect('/score');
         }
 
+        if(Auth::user()->group_id != 0 && Auth::user()->group_id != 4) {
+            return redirect('/score');
+        }
     
         if(Auth::user()->id>21){
             $group_id = $request->get('group_id');
