@@ -61,22 +61,22 @@
 					<span>市(州)、县(市、区):</span>
 					<p>{{ $data->areaName }}</p>
 				</div>
-				<div class="main_mse_item">
+				{{-- <div class="main_mse_item">
 					<span>学校名称:</span>
 					<p>{{ $data->school }}</p>
-				</div>
+				</div> --}}
 				<div class="main_mse_item">
 					<span>参与创作学生班级:</span>
 					<p>{{ $data->class }}</p>
 				</div>
-				<div class="main_mse_item">
+				{{-- <div class="main_mse_item">
 					<span>参与创作学生姓名:</span>
 					<p>{{ $data->student }}</p>
-				</div>
-				<div class="main_mse_item">
+				</div> --}}
+				{{-- <div class="main_mse_item">
 					<span>指导教师姓名:</span>
 					<p>{{ $data->teacher }}</p>
-				</div>
+				</div> --}}
 			</div>
 		
 		</div>
