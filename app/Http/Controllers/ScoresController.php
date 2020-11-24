@@ -285,14 +285,41 @@ class ScoresController extends Controller
     //     ]);
     // }
 
-    if(Auth::user()->group_id != 4){
+    if(Auth::user()->group_id != 4 && Auth::user()->group_id != 0){
         return view('scores.show', compact('d'));
     }
 
+    // if(Auth::user()->group_id == 0 ){
+    //     $user1 =  DB::table('user_last_score')->where('user_id', 30)->get('item_id');
+    //     $user2 =  DB::table('user_last_score')->where('user_id', 31)->get('item_id');
+    //     $user3 =  DB::table('user_last_score')->where('user_id', 32)->get('item_id');
+    //     foreach($d as $k=>$v) {      
+    //         $d[$k]['status2'] =  DB::table('user_last_score')->where('user_id',$user2)->where('item_id',$v['item_id'])->value('status');
+    //         $d[$k]['status3'] =  DB::table('user_last_score')->where('user_id',$user3)->where('item_id', $v['item_id'])->value('status');
+    //         if (in_array($v['item_id'], $a)){
+    //             $d[$k]['status'] = 1;
+    //         }elseif(in_array($v['item_id'], $b)){
+    //             $d[$k]['status'] = 2;
+    //         }
+    //         else{
+    //             $d[$k]['status'] = 0;
+    //         }
+    //         if ($v['last_score'] == -1){
+    //             unset($d[$k]);
+    //         }
+    
+    //     }
+    //     return view('scores.show', compact('d'));
+    // }
 
-    $true_ids = DB::table('user_last_score')->where('user_id', Auth::user()->id)->where('status', 1)->get('item_id');
+    if (Auth::user()->group_id == 0) {
+        $user = 30;
+    }else{
+        $user = Auth::user()->id;
+    }
+    $true_ids = DB::table('user_last_score')->where('user_id', $user)->where('status', 1)->get('item_id');
 
-    $false_ids = DB::table('user_last_score')->where('user_id', Auth::user()->id)->where('status', 2)->get('item_id');
+    $false_ids = DB::table('user_last_score')->where('user_id', $user)->where('status', 2)->get('item_id');
 
     $a=[];
     $b=[];
@@ -304,7 +331,7 @@ class ScoresController extends Controller
         $b[]=$v->item_id;
     }
     
-    switch (Auth::user()->id) {
+    switch ($user) {
         case 30:
             $user2=31;
             $user3=32;
@@ -316,7 +343,7 @@ class ScoresController extends Controller
         case 32:
             $user2=30;
             $user3=31;
-            break;    
+            break;
     }
     foreach($d as $k=>$v) {      
         $d[$k]['status2'] =  DB::table('user_last_score')->where('user_id',$user2)->where('item_id',$v['item_id'])->value('status');
@@ -334,6 +361,18 @@ class ScoresController extends Controller
         }
 
     }
+    
+    $c = [];
+    foreach($d as $k=>$v) {
+        if ($v['status'] == 2 && $v['status2'] == 2 && $v['status3'] == 2){
+            $c[] = $v;
+            unset($d[$k]);
+    }
+    }
+    foreach ($c as $k=>$v){
+        array_push($d,$v);
+    }
+    $d = array_merge($d);
 
     return view('scores.show', compact('d'));
 

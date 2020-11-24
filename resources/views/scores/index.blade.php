@@ -66,7 +66,7 @@
 				
 				<div class="btn" style="float: right; margin: 20px 0;">
 					<span class = "btn_over" onclick="submitScore()">确认评审完毕</span>
-					<span class = "btn_lock">查看评审结果</span>
+					{{-- <span class = "btn_lock">查看评审结果</span> --}}
 				</div>
 				<!--作品-->
 				<div class="zuopin">

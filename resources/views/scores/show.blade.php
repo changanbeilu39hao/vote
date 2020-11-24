@@ -7,7 +7,8 @@
 		<link rel="stylesheet" type="text/css" href="{{ asset('images/result.css') }}"/>
 				<link rel="stylesheet" type="text/css" href="{{ asset('images/iconfont.css') }}"/>
 		<script type="text/javascript" src="{{ asset('images/jquery-3.5.1.min.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('images/result.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('images/result.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('js/layer/layer.js') }}" ></script>
 	</head>
 	<body>
 		<!--顶部-->
@@ -52,10 +53,10 @@
 				<li id="zj6">zhuanjia12</li>
 				<li id="zj7">zhuanjia13</li>
 				<li class="t_head_lastSroce">最终得分</li>
-				@if (Auth::user()->group_id ==4 )
-				<li>终审1</li>
-                <li>终审2</li>
-				<li>终审3</li>
+				@if (Auth::user()->group_id ==4 || Auth::user()->group_id ==0  )
+				<li>zhuanjia30</li>
+                <li>zhuanjia31</li>
+				<li>zhuanjia32</li>
 				@endif
 			</ul>
 		</div>
@@ -67,8 +68,8 @@
                 <!--分数行--> 
                 @foreach ($d as $k=>$v)    
 
-				<li class="scoreDetails_list">
-					<span class="rank"></span>
+				<li class="scoreDetails_list" id="{{$v['item_id']}}" data-id="{{$v['item_id']}}">
+					<span class="rank">{{ $k+1 }}</span>
 					<span class="number"><a href="{{ route('score.detail',['id'=>$v['item_id']]) }}" target="_blank">{{ $v['item_id'] }}</a></span>
 					<span class="score">{{ $v['z1'] }}</span>
 					<span class="score">{{ $v['z2'] }}</span>
@@ -79,54 +80,62 @@
 					<span class="score">{{ $v['z13'] }}</span>
 					<span class="last_score">{{ $v['last_score'] }}</span>
 
-				@if (Auth::user()->group_id ==4 )
+			@if (Auth::user()->group_id == 0 )
+				<span class="yes_or_no " >
+					<i class="iconfont @if($v['status'] == 1)yn_cur2 icon-duigou @endif @if($v['status'] == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
+				<span class="yes_or_no">
+					<i class="iconfont @if($v['status2'] == 1)yn_cur2 icon-duigou @endif @if($v['status2'] == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
+				<span class="yes_or_no">
+					<i class="iconfont @if($v['status3'] == 1)yn_cur2 icon-duigou @endif @if($v['status3'] == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
+						
+			@elseif(Auth::user()->id == 30)
+				<span class="yes_or_no  isclick" >
+					<!--当前用户会有两各按钮-->
+					<i class="iconfont icon-duigou @if($v['status'] == 1)yn_cur2  @endif"></i>
+					<i class="iconfont icon-cuo @if($v['status'] == 2)yn_cur1 @endif"></i>
+				</span>
+				<span class="yes_or_no">
+					<i class="iconfont @if($v['status2'] == 1)yn_cur2 icon-duigou @endif @if($v['status2'] == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
+				<span class="yes_or_no">
+					<i class="iconfont @if($v['status3'] == 1)yn_cur2 icon-duigou @endif @if($v['status3'] == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
 
-				@if (Auth::user()->id == 30)
-					<span class="yes_or_no  isclick" >
-						<!--当前用户会有两各按钮-->
-						<i class="iconfont icon-duigou @if($v['status'] == 1)yn_cur2  @endif"></i>
-						<i class="iconfont icon-cuo @if($v['status'] == 2)yn_cur1 @endif"></i>
-					</span>
-					<span class="yes_or_no">
-						<i class="iconfont @if($v['status2'] == 1)yn_cur2 icon-duigou @endif @if($v['status2'] == 2)icon-cuo yn_cur1 @endif"></i>
-					</span>
-					<span class="yes_or_no">
-						<i class="iconfont @if($v['status3'] == 1)yn_cur2 icon-duigou @endif @if($v['status3'] == 2)icon-cuo yn_cur1 @endif"></i>
-					</span>
-					
-					@endif
+			@endif
 
-					@if (Auth::user()->id == 31)
-					<span class="yes_or_no">
-						<i class="iconfont @if($v['status2']== 1)yn_cur2 icon-duigou @endif @if($v['status2'] == 2)icon-cuo yn_cur1 @endif"></i>
-					</span>
-					<span class="yes_or_no  isclick" >
-						<!--当前用户会有两各按钮-->
-						<i class="iconfont icon-duigou @if($v['status']  == 1)yn_cur2 @endif"></i>
-						<i class="iconfont icon-cuo @if($v['status']  == 2)yn_cur1 @endif"></i>
-					</span>
-					<span class="yes_or_no">
-						<i class="iconfont @if($v['status3'] == 1)yn_cur2 icon-duigou @endif @if($v['status3'] == 2)icon-cuo yn_cur1 @endif"></i>
-					</span>
-					
-					@endif
 
-					@if (Auth::user()->id == 32)
-					<span class="yes_or_no">
-						<i class="iconfont @if($v['status2'] == 1)yn_cur2 icon-duigou @endif @if($v['status2'] == 2)icon-cuo yn_cur1 @endif"></i>
-					</span>
-					<span class="yes_or_no">
-						<i class="iconfont @if($v['status3']  == 1)yn_cur2 icon-duigou @endif @if($v['status3']  == 2)icon-cuo yn_cur1 @endif"></i>
-					</span>
-					<span class="yes_or_no  isclick" >
-						<!--当前用户会有两各按钮-->
-						<i class="iconfont icon-duigou @if($v['status'] == 1)yn_cur2 @endif"></i>
-						<i class="iconfont icon-cuo @if($v['status'] == 2)yn_cur1 @endif"></i>
-					</span>
-					@endif
+				@if (Auth::user()->id == 31)
+				<span class="yes_or_no">
+					<i class="iconfont @if($v['status2']== 1)yn_cur2 icon-duigou @endif @if($v['status2'] == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
+				<span class="yes_or_no  isclick" >
+					<!--当前用户会有两各按钮-->
+					<i class="iconfont icon-duigou @if($v['status']  == 1)yn_cur2 @endif"></i>
+					<i class="iconfont icon-cuo @if($v['status']  == 2)yn_cur1 @endif"></i>
+				</span>
+				<span class="yes_or_no">
+					<i class="iconfont @if($v['status3'] == 1)yn_cur2 icon-duigou @endif @if($v['status3'] == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
+				
+				@endif
 
-				@endif	
-					
+				@if (Auth::user()->id == 32)
+				<span class="yes_or_no">
+					<i class="iconfont @if($v['status2'] == 1)yn_cur2 icon-duigou @endif @if($v['status2'] == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
+				<span class="yes_or_no">
+					<i class="iconfont @if($v['status3']  == 1)yn_cur2 icon-duigou @endif @if($v['status3']  == 2)icon-cuo yn_cur1 @endif"></i>
+				</span>
+				<span class="yes_or_no  isclick" >
+					<!--当前用户会有两各按钮-->
+					<i class="iconfont icon-duigou @if($v['status'] == 1)yn_cur2 @endif"></i>
+					<i class="iconfont icon-cuo @if($v['status'] == 2)yn_cur1 @endif"></i>
+				</span>
+				@endif
+
 				</li>
                 @endforeach
                 
@@ -135,8 +144,23 @@
 		<br><br><br><br>
 
         <div class="empty"></div>
-    </body>
+
+	<script>
+		document.onreadystatechange = loadingChange;
+        function loadingChange() {
+            if (document.readyState == "complete") {
+				layer.closeAll('loading');
+			}
+			else{
+				layer.load(2);
+                  $(".layui-layer-shade").css("opacity", "0.5");
+               $(".layui-layer-content").css("margin", "0 auto");
+			}
+		}
+	</script>
 <script>
+
+
     function getUrlParam(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
 		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
@@ -168,7 +192,9 @@
             $("#zj6").text('zhuanjia20')
             $("#zj7").text('zhuanjia21')
 		}
-		
+			
+		// addRank();
+		// sortBycha();
 	})
 	
 	$('.isclick i').click(function(){
@@ -218,28 +244,28 @@
 			//如果三个不通过，则排到最后
 			if(cuo_num == 2){
 				var copyLi = $(this).parents('li')
-				$('.scoreDetails_lists').append(copyLi)
-				addRank()
+				window.location.reload()
+				// $('.scoreDetails_lists').append(copyLi);
+				// addRank()
 			}
 		}
 	})
-	
-	addRank()
+
 	function addRank(){
 		var rank = document.querySelectorAll(".rank")
-		for(var i = 0; i < rank.length; i++){
+		for(var i = -1, item; item = rank[i++];){
 			//遍历排名序号
-			rank[i].innerText = i+1
-			var rank_num = parseInt( rank[i].innerText )
+			item.innerText = i+1
+			var rank_num = parseInt( item.innerText )
 			//前1000名添加背景
-			if( rank_num <= 1000 && !rank[i].parentNode.classList.contains('BgColor') ){
-				rank[i].parentNode.className += " BgColor"
-				rank[i].className += " blodFont"
+			if( rank_num <= 1000 && !item.parentNode.classList.contains('BgColor') ){
+				item.parentNode.className += " BgColor"
+				item.className += " blodFont"
 			}
-		}
+			}
 	}
 
-	sortBycha()
+
 
 	function sortBycha(){
 	var hasCuo_num = 0
@@ -257,12 +283,15 @@
 	if(hasCuo_num == 3){
 		var copyLi = scoreDetails_list.eq(li_i)
 		$('.scoreDetails_lists').append(copyLi)
-		addRank()
+		//addRank()
+        
 	}
 	hasCuo_num = 0
 	}
 	}
+
 </script>
+</body>
 </html>
 @if (app()->isLocal())
 @include('sudosu::user-selector')
