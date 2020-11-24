@@ -194,7 +194,7 @@ class ScoresController extends Controller
             MAX(IF(`user_id`=11,score,-1)) as 'z11',
             MAX(IF(`user_id`=12,score,-1)) as 'z12',
             MAX(IF(`user_id`=13,score,-1)) as 'z13' 
-            FROM scores WHERE item_id<2001
+            FROM scores 
             GROUP BY item_id
             ");
         }
@@ -209,12 +209,12 @@ class ScoresController extends Controller
             MAX(IF(`user_id`=16,score,-1)) as 'z11',
             MAX(IF(`user_id`=17,score,-1)) as 'z12' ,
             MAX(IF(`user_id`=33,score,-1)) as 'z13'
-            FROM scores WHERE item_id>2000 AND item_id<4001
+            FROM scores 
             GROUP BY item_id
             ");
         }
 
-        if($group_id ==3 ){
+        if($group_id == 3 ){
             $data =  DB::select("SELECT item_id,
             MAX(IF(`user_id`=7,score,-1)) as 'z1',
             MAX(IF(`user_id`=8,score,-1)) as 'z2',
@@ -223,7 +223,7 @@ class ScoresController extends Controller
             MAX(IF(`user_id`=19,score,-1)) as 'z11',
             MAX(IF(`user_id`=20,score,-1)) as 'z12',
             MAX(IF(`user_id`=21,score,-1)) as 'z13' 
-            FROM scores WHERE item_id>4000 
+            FROM scores 
             GROUP BY item_id
             ");
         }
@@ -269,48 +269,10 @@ class ScoresController extends Controller
     array_multisort($a, SORT_DESC,$d);
     
 
-    // foreach ($d as $v){
-    //     DB::table('last_scores')->insert([
-    //         'item_id' => $v['item_id'],
-    //         'z1'=>$v['z1'],
-    //         'z2'=>$v['z2'],
-    //         'z3'=>$v['z3'],
-    //         'z4'=>$v['z10'],
-    //         'z5'=>$v['z11'],
-    //         'z6'=>$v['z12'],
-    //         'z7'=>$v['z13'],
-    //         'last_score'=>$v['last_score'],
-    //         'group_id'=>$group_id
-
-    //     ]);
-    // }
-
     if(Auth::user()->group_id != 4 && Auth::user()->group_id != 0){
         return view('scores.show', compact('d'));
     }
 
-    // if(Auth::user()->group_id == 0 ){
-    //     $user1 =  DB::table('user_last_score')->where('user_id', 30)->get('item_id');
-    //     $user2 =  DB::table('user_last_score')->where('user_id', 31)->get('item_id');
-    //     $user3 =  DB::table('user_last_score')->where('user_id', 32)->get('item_id');
-    //     foreach($d as $k=>$v) {      
-    //         $d[$k]['status2'] =  DB::table('user_last_score')->where('user_id',$user2)->where('item_id',$v['item_id'])->value('status');
-    //         $d[$k]['status3'] =  DB::table('user_last_score')->where('user_id',$user3)->where('item_id', $v['item_id'])->value('status');
-    //         if (in_array($v['item_id'], $a)){
-    //             $d[$k]['status'] = 1;
-    //         }elseif(in_array($v['item_id'], $b)){
-    //             $d[$k]['status'] = 2;
-    //         }
-    //         else{
-    //             $d[$k]['status'] = 0;
-    //         }
-    //         if ($v['last_score'] == -1){
-    //             unset($d[$k]);
-    //         }
-    
-    //     }
-    //     return view('scores.show', compact('d'));
-    // }
 
     if (Auth::user()->group_id == 0) {
         $user = 30;
@@ -374,6 +336,8 @@ class ScoresController extends Controller
     }
     $d = array_merge($d);
 
+
+    
     return view('scores.show', compact('d'));
 
     }
