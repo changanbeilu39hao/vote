@@ -61,10 +61,10 @@
 					<span>作品组别:</span>
 					<p>{{ $data->groupType }}</p>
 				</div>
-				<div class="main_mse_item">
+				{{-- <div class="main_mse_item">
 					<span>市(州)、县(市、区):</span>
 					<p>{{ $data->areaName }}</p>
-				</div>
+				</div> --}}
 				{{-- <div class="main_mse_item">
 					<span>学校名称:</span>
 					<p>{{ $data->school }}</p>
