@@ -308,6 +308,7 @@ class ScoresController extends Controller
             $user3=31;
             break;
     }
+    
     foreach($d as $k=>$v) {      
         $d[$k]['status2'] =  DB::table('user_last_score')->where('user_id',$user2)->where('item_id',$v['item_id'])->value('status');
         $d[$k]['status3'] =  DB::table('user_last_score')->where('user_id',$user3)->where('item_id', $v['item_id'])->value('status');
@@ -325,6 +326,8 @@ class ScoresController extends Controller
 
     }
     
+    // dd($d);
+
     $c = [];
     foreach($d as $k=>$v) {
         if ($v['status'] == 2 && $v['status2'] == 2 && $v['status3'] == 2){
@@ -332,13 +335,13 @@ class ScoresController extends Controller
             unset($d[$k]);
     }
     }
+    
     foreach ($c as $k=>$v){
         array_push($d,$v);
     }
     $d = array_merge($d);
 
-
-    
+    // dd($d);
     return view('scores.show', compact('d'));
 
     }

@@ -71,7 +71,7 @@
 				<!--作品-->
 				<div class="zuopin">
 					<a href="@if($page == 1) # @else{{ $pre_url }} @endif" class="prev1">上一页</a>
-					<a href="@if($page == $total_page) # @else{{ $next_url }} @endif" class="next1">下一页</a>
+					<a href="javascript:location.reload();" class="next1">下一页</a>
 					<div class="zuopin_main">
             
                         @foreach ($works as $item)

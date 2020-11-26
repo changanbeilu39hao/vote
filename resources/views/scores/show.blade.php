@@ -242,12 +242,12 @@
 				}
 			}
 			//如果三个不通过，则排到最后
-			if(cuo_num == 2){
-				var copyLi = $(this).parents('li')
-				window.location.reload()
-				// $('.scoreDetails_lists').append(copyLi);
-				// addRank()
-			}
+			// if(cuo_num == 2){
+			// 	var copyLi = $(this).parents('li')
+			// 	window.location.reload()
+			// 	// $('.scoreDetails_lists').append(copyLi);
+			// 	// addRank()
+			// }
 		}
 	})
 
