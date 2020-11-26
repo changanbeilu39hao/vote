@@ -27,18 +27,31 @@ window.onload = function(){
 		}	
 	}
 	
+	// for( var i = 0; i < scoreDetails_list.length; i++){
+	// 	var scoreNum = []
+	// 	var score = scoreDetails_list[i].querySelectorAll(".score")
+	// 	for(var j = 0; j < score.length; j++){
+	// 		var score_n = parseInt( score[j].innerText )
+	// 		scoreNum.push(score_n)
+	// 		var max_i = getmax(scoreNum)
+	// 		var min_i = getmin(scoreNum)
+	// 	}
+	// 	score[max_i].className += " maxmin"
+	// 	score[min_i].className += " maxmin"
+	// }
+
 	for( var i = 0; i < scoreDetails_list.length; i++){
 		var scoreNum = []
 		var score = scoreDetails_list[i].querySelectorAll(".score")
 		for(var j = 0; j < score.length; j++){
-			var score_n = parseInt( score[j].innerText )
-			scoreNum.push(score_n)
-			var max_i = getmax(scoreNum)
-			var min_i = getmin(scoreNum)
+		 var score_n = parseFloat( score[j].innerText )
+		 scoreNum.push(score_n)
+		 var max_i = getmax(scoreNum)
+		 var min_i = getmin(scoreNum)
 		}
 		score[max_i].className += " maxmin"
 		score[min_i].className += " maxmin"
-	}
+	   }
 	
 	function 	getmax(arr) {
 		var max = arr[0]

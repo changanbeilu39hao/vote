@@ -269,8 +269,14 @@ class ScoresController extends Controller
     
     array_multisort($a, SORT_DESC,$d);
     
-
+    
     if(Auth::user()->group_id != 4 && Auth::user()->group_id != 0){
+        foreach($d as $k=>$v) {      
+            if ($v['last_score'] == -1){
+                unset($d[$k]);
+            }
+        }
+     
         return view('scores.show', compact('d'));
     }
 
@@ -343,7 +349,8 @@ class ScoresController extends Controller
     //         ]);
     // }
 
-    return 200;
+    // return 200;
+
     $c = [];
     foreach($d as $k=>$v) {
         if ($v['status'] == 2 && $v['status2'] == 2 && $v['status3'] == 2){
