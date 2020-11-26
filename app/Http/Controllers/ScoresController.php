@@ -328,6 +328,22 @@ class ScoresController extends Controller
     
     // dd($d);
 
+    foreach($d as $k=>$v){
+        DB::table('last_scores')->insert([
+            'item_id'=>$v['item_id'],
+            'z1'=>$v['z1'],
+            'z2'=>$v['z2'],
+            'z3'=>$v['z3'],
+            'z4'=>$v['z10'],
+            'z5'=>$v['z11'],
+            'z6'=>$v['z12'],
+            'z7'=>$v['z13'],
+            'last_score'=>$v['last_score'],
+            'group_id'=>1,
+            ]);
+    }
+
+    return 200;
     $c = [];
     foreach($d as $k=>$v) {
         if ($v['status'] == 2 && $v['status2'] == 2 && $v['status3'] == 2){
