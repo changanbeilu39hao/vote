@@ -339,7 +339,7 @@ class ScoresController extends Controller
             'z6'=>$v['z12'],
             'z7'=>$v['z13'],
             'last_score'=>$v['last_score'],
-            'group_id'=>2,
+            'group_id'=>3,
             ]);
     }
 
