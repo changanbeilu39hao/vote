@@ -197,6 +197,7 @@ $(function(){
         $(".J-paginationjs-page").click(function(){
 			var a = $(this).attr('data-num');
 			var l = getUrlParam('level');
+			var g = getUrlParam('group_id');
 			console.log(l);
             $(window).attr('location', "{{ $r_url }}?size=4&page="+a+"&group={{ Auth::user()->group_id }}&level="+l+"");
 		});
