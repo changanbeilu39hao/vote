@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="GB2312">
+		<meta charset="utf-8">
 		<title>市州排名</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset("images/rank_city.css") }}"/>
 		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -22,7 +22,7 @@
 				<span>4.市(州)前10位获得优秀组织奖</span><br />
 				<span>5.县(市/区)前50位获得优秀组织奖</span>	
 			</div>
-			<a class="change_rank" href="#">查看作品排名</a>
+			<a class="change_rank" href="/ranks">查看作品排名</a>
 		</div>
 		<div style="text-align:center;">
 			<div class="change_rank" id="export1" style="position:relative;cursor: pointer;display: inline-block;">导出当前组数据</div>

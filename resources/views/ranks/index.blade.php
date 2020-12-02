@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="GB2312">
+		<meta charset="utf-8">
 		<title>作品排名</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset("images/rank_product.css") }}"/>
 		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -22,7 +22,7 @@
 				<span>3.作品得分 = 评审得分 + 投票得分</span><br />
 				<span>4.黄色背景为一等奖，绿色背景为二等奖，蓝色背景为三等奖</span>
 			</div>
-			<a class="change_rank" href="#">查看市(州)、县(市/区)排名</a>
+			<a class="change_rank" href="/city">查看市(州)、县(市/区)排名</a>
 		</div>
 		<div style="text-align:center;">
 		<div class="change_rank" id="export" style="position:relative;cursor: pointer;display: inline-block;">导出当前组数据</div>
