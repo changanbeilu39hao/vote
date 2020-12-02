@@ -31,11 +31,19 @@ Route::get('score/last_score', 'ScoresController@last_score')->name('score.last'
 Route::post('score/last_score_choose', 'ScoresController@last_score_choose');
 Route::post('score/last_score_confirm', 'ScoresController@last_score_confirm');
 
+Route::middleware('page-cache')->get('ranks/{id}', 'RanksController@index')->name('Ranks.index');
+Route::get('city', 'RanksController@city');
+
 
 Auth::routes();
 Route::get('/', function(){
     return redirect(route('check.pre'));
 });
+
+Route::get('/ranks', function(){
+    return redirect('/ranks/1');
+});
+
 
 // Route::post('check/store', 'CheckController@store')->name('check.store');
 // Route::post('check/confirm', 'CheckController@confirm')->name('check.confirm');

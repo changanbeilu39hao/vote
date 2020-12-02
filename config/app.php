@@ -141,6 +141,7 @@ return [
     */
 
     'providers' => [
+        Silber\PageCache\LaravelServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...

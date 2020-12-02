@@ -1,0 +1,244 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+}
+html,body{
+	font-family: "microsoft yahei";
+}
+ul,li{
+	list-style: none;
+}
+img{
+	display: block;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+
+
+/*顶部*/
+.top{
+	width: 100%;
+	height: 60px;
+	background: #be0d0d;
+}
+
+.top p{
+	font-size: 26px;
+	line-height: 60px;
+	color: #fff;
+	float: left;
+	padding-left: 20px;
+}
+
+/*提示*/
+.hint{
+	width: 1200px;
+	box-sizing: border-box;
+	margin: 0 auto;
+	margin-top:20px;
+	overflow: hidden;
+	position: relative;
+}
+.hint_text{
+	width: 490px;
+	float: left;
+	background: #efefef;
+	border-radius: 10px;
+	padding: 20px;
+}
+.hint p{
+	font-size: 16px;
+	float: left;
+	font-weight: bold;
+	width: 100%;
+}
+.hint span{
+	font-size: 16px;
+	margin-top: 10px;
+}
+.change_rank{
+	height: 40px;
+	padding: 0 20px;
+	color: #fff;
+	background: #BE0D0D;
+	position: absolute;
+	right: 0;
+	top: 36px;
+	line-height: 40px;
+}
+
+.nav{
+	width: 1200px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+.nav span{
+	width: 50%;
+	font-size: 18px;
+	text-align: center;
+	float: left;
+	display: block;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #cbcbcb;
+	cursor: pointer;
+}
+.nav span:hover{
+	border-bottom: 1px solid #be0d0d;
+	color:#be0d0d;
+	font-weight: bold;
+}
+.nav .navcur{
+	border-bottom: 1px solid #be0d0d;
+	color:#be0d0d;
+	font-weight: bold;
+}
+
+.city_lists,.county_lists{
+	height: 600px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.city_head,.county_head{
+	width: 1200px;
+	height: 40px;
+	font-size: 14px;
+	line-height: 40px;
+	border-bottom: 1px solid #cbcbcb;
+	margin: 0 auto;
+	font-weight: bold;
+}
+.city_head .t_head_rank{
+	width: 100px;
+	font-weight: bold;
+	color: #be0d0d;
+}
+.city_head_lists .city{
+	width: 160px;
+}
+.city_head_lists li{
+	width: 100px;
+	float: left;
+	text-align: center;
+}
+.city_head_lists li{
+	width: 100px;
+	float: left;
+	text-align: center;
+}
+.city_head_lists td{
+	width: 100px;
+	float: left;
+	text-align: center;
+}
+.county_head_lists td{
+	width: 88px;
+	float: left;
+	text-align: center;
+}
+.county_head_lists li{
+	width: 88px;
+	float: left;
+	text-align: center;
+}
+.county_head_lists .city{
+	width: 100px;
+}
+.county_head_lists .county{
+	width: 200px;
+}
+
+.scoreDetails{
+	width: 1200px;
+	/* height: 600px; */
+	margin: 0 auto;
+	font-size: 0;
+	overflow: hidden;
+}
+.scoreDetails_lists{
+	width: 1223px;
+	height: auto;
+	overflow: hidden;
+}
+.scoreDetails_list .score{
+	color: #999;
+}
+.city_head_lists .score{
+	color: #999;
+}
+.scoreDetails_list,.county_list{
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	border-bottom: 1px solid #cbcbcb;
+	box-sizing: border-box;
+}
+
+.scoreDetails_list span{
+	width: 100px;
+	line-height: 39px;
+	font-size: 14px;
+	color: #333;
+	text-align: center;
+	display: block;
+	float: left;
+}
+.county_list span{
+	width: 88px;
+	line-height: 39px;
+	font-size: 14px;
+	color: #333;
+	text-align: center;
+	display: block;
+	float: left;
+}
+.scoreDetails_list:hover{
+	background: #fff;	
+}
+.county_list:hover{
+	background: #fff;	
+}
+.scoreDetails_list .number{
+	width: 160px;
+}
+.county_list .city{
+	display: inline-block;
+	width: 100px;
+	color: #999;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap
+}
+.county_list .county{
+	width: 200px;
+}
+.scoreDetails_list .rank{
+	width: 100px;
+	font-weight: bold;
+	color: #be0d0d;
+}
+.county_head_lists .score{
+	color: #999;
+}
+.county_list .score{
+	color: #999;
+}
+.BgColor1{
+	background:#f9f9d3;
+}
+
+.empty{
+	width: 10px;
+	height: 10px;
+	position: fixed;
+	left: 0;
+	top:0;
+	cursor: pointer;
+}
