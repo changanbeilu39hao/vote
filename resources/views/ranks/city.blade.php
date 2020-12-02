@@ -25,8 +25,8 @@
 			<a class="change_rank" href="/ranks">查看作品排名</a>
 		</div>
 		<div style="text-align:center;">
-			<div class="change_rank" id="export1" style="position:relative;cursor: pointer;display: inline-block;">导出当前组数据</div>
-			<div class="change_rank" id="export2" style="position:relative;cursor: pointer;display: none;">导出当前组数据</div>
+			<div class="change_rank" id="export1" style="position:relative;cursor: pointer;display: inline-block;">导出市(州)排名数据</div>
+			<div class="change_rank" id="export2" style="position:relative;cursor: pointer;display: none;">导出县(市、区)排名数据</div>
 
 		</div>
 		<!--导航-->
