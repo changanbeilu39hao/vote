@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Exceptions\InvalidRequestException;
+
 class LastScoresController extends Controller
 {
 
@@ -16,7 +18,9 @@ class LastScoresController extends Controller
 
     public function index(Request $request)
     {
-        
+        if (Auth::user()->group_id != 5){
+            throw new InvalidRequestException('您没有权限进入!');
+        }
         $user = Auth::user()->name;
         $choose = DB::table('last_scores_2')->where($user,'!=',null)->pluck('item_id')->toArray();
 
