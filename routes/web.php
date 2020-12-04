@@ -34,6 +34,8 @@ Route::post('score/last_score_confirm', 'ScoresController@last_score_confirm');
 Route::middleware('page-cache')->get('ranks/{id}', 'RanksController@index')->name('Ranks.index');
 Route::middleware('page-cache')->get('city', 'RanksController@city');
 
+Route::get('last_score', 'LastScoresController@index');
+Route::post('/last_score', 'LastScoresController@store');
 
 Auth::routes();
 Route::get('/', function(){
