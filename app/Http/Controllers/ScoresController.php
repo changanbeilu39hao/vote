@@ -20,9 +20,9 @@ class ScoresController extends Controller
     public function index(Request $request, $size = 4, $page = 1, $scored_status = 0)
     {
 
-        if (Auth::user()->group_id !=0){
-            throw new InvalidRequestException('评审已结束！');
-        }
+        // if (Auth::user()->group_id !=0){
+        //     throw new InvalidRequestException('评审已结束！');
+        // }
 
         $finished_score = Auth::user()->is_scored;
         $is_inspected = DB::table('users')->where('group_id', Auth::user()->group_id)->where('inspected', 1)->first();
@@ -181,9 +181,9 @@ class ScoresController extends Controller
     public function show(Request $request, $group_id=1)
     {
 
-        if (Auth::user()->group_id !=0){
-            throw new InvalidRequestException('评审已结束！');
-        }
+        // if (Auth::user()->group_id !=0){
+        //     throw new InvalidRequestException('评审已结束！');
+        // }
 
         if(Auth::user()->is_scored == 0){
             if(Auth::user()->group_id != 0 && Auth::user()->group_id != 4){

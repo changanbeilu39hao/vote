@@ -32,7 +32,7 @@ Route::post('score/last_score_choose', 'ScoresController@last_score_choose');
 Route::post('score/last_score_confirm', 'ScoresController@last_score_confirm');
 
 Route::middleware('page-cache')->get('ranks/{id}', 'RanksController@index')->name('Ranks.index');
-Route::get('city', 'RanksController@city');
+Route::middleware('page-cache')->get('city', 'RanksController@city');
 
 
 Auth::routes();
