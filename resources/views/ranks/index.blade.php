@@ -58,7 +58,7 @@
 				@foreach ($data as $k=>$v)
 				<tr class="scoreDetails_list">
 					<td class="rank">{{ $k+1 }}</td>
-					<td class="number"><a href="#" target="_blank">{{ $v['item_id'] }}</a></td>
+					<td class="number"><a href="https://aqjy.newssc.org/work/workdetail/?id={{ $v['item_id'] }}" target="_blank">{{ $v['item_id'] }}</a></td>
 					<td class="score">{{ $v['z1'] }}</td>
 					<td class="score">{{ $v['z2'] }}</td>
 					<td class="score">{{ $v['z3'] }}</td>
