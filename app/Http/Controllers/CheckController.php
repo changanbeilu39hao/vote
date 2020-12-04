@@ -119,6 +119,10 @@ class CheckController extends Controller
     public function pre(Request $request, $page=1, $size=4)
     {
 
+
+        if(Auth::user()->group_id == 5) {
+            return redirect('/last_score');
+        }
         if (Auth::user()->group_id !=0){
             throw new InvalidRequestException('评审已结束！');
         }
@@ -126,6 +130,8 @@ class CheckController extends Controller
         if(Auth::user()->group_id == 4) {
             return redirect('/score/show');
         }
+
+        
 
         if(Auth::user()->group_id != 0 && Auth::user()->group_id != 4) {
             return redirect('/score');
