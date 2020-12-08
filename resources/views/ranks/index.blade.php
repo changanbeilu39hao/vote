@@ -35,7 +35,7 @@
 		</div>
 		
 		
-		<div  class="t_head">
+		<div  class="t_head" style="width:1400px;">
 			<table class="t_head_lists"  id="test_table">
 				<thead>
 				  <td class="t_head_rank">排名</td>
@@ -48,8 +48,10 @@
 				  <td>zhuanjia06</td>
 				  <td>zhuanjia07</td>
 				  <td class="t_head_lastSroce">评审得分</td>
+				  <td>评审排名</td>
 				  <td>票数</td>
 				  <td>投票得分</td>
+				  <td>投票排名</td>
 				  <td>作品总分</td>
 				  <td>指导教师</td>
 				  <td>创作者</td>
@@ -67,8 +69,10 @@
 					<td class="score">{{ $v['z6'] }}</td>
 					<td class="score">{{ $v['z7'] }}</td>
 					<td>{{ $v['last_score'] }}</td>
+					<td>{{ $v['score_rank'] }}</td>
 					<td>{{ $v['Tickets'] }}</td>
 					<td>{{ $v['vote_score'] }}</td>
+					<td>{{ $v['vote_rank'] }}</td>
 					<td>{{ $v['total_score'] }}</td>
 					<td>{{ $v['Teacher'] }}</td>
 					<td class="author">{{ $v['Student'] }}</td>

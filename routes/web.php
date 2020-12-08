@@ -31,8 +31,11 @@ Route::get('score/last_score', 'ScoresController@last_score')->name('score.last'
 Route::post('score/last_score_choose', 'ScoresController@last_score_choose');
 Route::post('score/last_score_confirm', 'ScoresController@last_score_confirm');
 
-Route::middleware('page-cache')->get('ranks/{id}', 'RanksController@index')->name('Ranks.index');
-Route::middleware('page-cache')->get('city', 'RanksController@city');
+Route::get('ranks/{id}', 'RanksController@index')->name('Ranks.index');
+Route::get('city', 'RanksController@city');
+
+// Route::middleware('page-cache')->get('ranks/{id}', 'RanksController@index')->name('Ranks.index');
+// Route::middleware('page-cache')->get('city', 'RanksController@city');
 
 Route::get('last_score', 'LastScoresController@index');
 Route::post('/last_score', 'LastScoresController@store');
