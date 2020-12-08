@@ -121,7 +121,7 @@ class CheckController extends Controller
 
 
         if(Auth::user()->group_id == 5) {
-            return redirect('/last_score');
+            return redirect('/ranks');
         }
         if (Auth::user()->group_id !=0){
             throw new InvalidRequestException('评审已结束！');
