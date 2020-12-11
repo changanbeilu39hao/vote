@@ -127,17 +127,17 @@ class RanksController extends Controller
             ->select('Name', 'Code')
             ->get();
 
-$cities_count_sql = 'SELECT x.*,
-(SELECT count(*)  FROM
-    (SELECT tg.* FROM
-    (SELECT w.Id,c.CityId,c.AreaId FROM works w 
-    LEFT JOIN consumer c on c.Id=w.ConsumerId) tg) as tg1
-    WHERE 1=1 and tg1.CityId=x.`Code`) num
-FROM
-(SELECT p.`Name` as p_name,c.`Code`,c.`Name`FROM 
-(SELECT `Code`,`Name`,Parentid FROM xzq WHERE Parentid=510000) AS c
-LEFT JOIN xzq p  on p.`Code`=c.Parentid
-) x';
+            $cities_count_sql = 'SELECT x.*,
+            (SELECT count(*)  FROM
+                (SELECT tg.* FROM
+                (SELECT w.Id,c.CityId,c.AreaId FROM works w 
+                LEFT JOIN consumer c on c.Id=w.ConsumerId) tg) as tg1
+                WHERE 1=1 and tg1.CityId=x.`Code`) num
+            FROM
+            (SELECT p.`Name` as p_name,c.`Code`,c.`Name`FROM 
+            (SELECT `Code`,`Name`,Parentid FROM xzq WHERE Parentid=510000) AS c
+            LEFT JOIN xzq p  on p.`Code`=c.Parentid
+            ) x';
 
 
 
@@ -161,25 +161,19 @@ LEFT JOIN xzq x_a on x.`Code`=x_a.Parentid';
 $cities_count = array_map('get_object_vars', DB::select($cities_count_sql));
 $areas_count = array_map('get_object_vars', DB::select($areas_count_sql));
 
+
+
 $found_arr = array_column($cities_count, 'Code');
 $found_area_arr = array_column($areas_count, 'Code');
 
-
-
-$data = [];
-$areas = [];
+// dd($first);
 foreach ($cities as $k=>$v) {
     $areas[] = array_map('get_object_vars', DB::table('xzq')
                         ->where('ParentId', $v->Code)
                         ->select('Code', 'Name', 'Parentid')
                         ->get()
                         ->toArray()); 
-    
-    // $count = DB::table('works')
-    //             ->leftJoin('consumer', 'works.ConsumerId', '=', 'consumer.Id')
-    //             ->select('works.Id', 'consumer.CityId', 'consumer.AreaId')
-    //             ->where('consumer.CityId', $v->Code)
-    //             ->count();
+
 
 
     $found_key = array_search($v->Code,$found_arr);
@@ -188,60 +182,65 @@ foreach ($cities as $k=>$v) {
     $data[$k]['count_score'] = $found_count*0.1;
     $data[$k]['city'] = $v->Name;
 
-    $first = 0;
-    $second = 0;
-    $third = 0;
+    // $first = 0;
+    $first = DB::table('awardswork')->where('CityId', $v->Code)->where('PrizeLevel', 1)->count();
+    // $second = 0;
+    $second = DB::table('awardswork')->where('CityId', $v->Code)->where('PrizeLevel', 2)->count();
+    // $third = 0;
+    $third = DB::table('awardswork')->where('CityId', $v->Code)->where('PrizeLevel', 3)->count();
 
-    foreach (array_slice(Cache::get('key1'), 0, 50) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $first++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $second++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $third++;
-        } 
-    }
+    
 
-
-
-    foreach (array_slice(Cache::get('key2'), 0, 50) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $first++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $second++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $third++;
-        } 
-    }
+    // foreach (array_slice(Cache::get('key1'), 0, 50) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $first++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $second++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $third++;
+    //     } 
+    // }
 
 
-    foreach (array_slice(Cache::get('key3'), 0, 50) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $first++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $second++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
-        if($b['CityId'] == $v->Code){
-            $third++;
-        } 
-    }
+
+    // foreach (array_slice(Cache::get('key2'), 0, 50) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $first++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $second++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $third++;
+    //     } 
+    // }
+
+
+    // foreach (array_slice(Cache::get('key3'), 0, 50) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $first++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $second++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
+    //     if($b['CityId'] == $v->Code){
+    //         $third++;
+    //     } 
+    // }
 
 
     $data[$k]['first'] = $first;
@@ -274,60 +273,65 @@ foreach ($areas_arr as $k=>$v) {
     $areas_arr[$k]['city'] = DB::table('xzq')->where('Code', $v['Parentid'])->value('Name');
     $areas_arr[$k]['count_score'] = $found_area_count*0.1;
 
-    $first = 0;
-    $second = 0;
-    $third = 0;
+    // $first = 0;
+    $first = DB::table('awardswork')->where('AreaId', $v['Code'])->where('PrizeLevel', 1)->count();
+    // $second = 0;
+    $second = DB::table('awardswork')->where('AreaId', $v['Code'])->where('PrizeLevel', 2)->count();
+    // $third = 0;
+    $third = DB::table('awardswork')->where('AreaId', $v['Code'])->where('PrizeLevel', 3)->count();
 
-    foreach (array_slice(Cache::get('key1'), 0, 50) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $first++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $second++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $third++;
-        } 
-    }
+    
 
-
-
-    foreach (array_slice(Cache::get('key2'), 0, 50) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $first++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $second++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $third++;
-        } 
-    }
+    // foreach (array_slice(Cache::get('key1'), 0, 50) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $first++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $second++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $third++;
+    //     } 
+    // }
 
 
-    foreach (array_slice(Cache::get('key3'), 0, 50) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $first++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $second++;
-        } 
-    }
-    foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
-        if($b['AreaId'] == $v['Code']){
-            $third++;
-        } 
-    }
+
+    // foreach (array_slice(Cache::get('key2'), 0, 50) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $first++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $second++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $third++;
+    //     } 
+    // }
+
+
+    // foreach (array_slice(Cache::get('key3'), 0, 50) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $first++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 50, 100) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $second++;
+    //     } 
+    // }
+    // foreach (array_slice(Cache::get('key1'), 150, 200) as $a=>$b){
+    //     if($b['AreaId'] == $v['Code']){
+    //         $third++;
+    //     } 
+    // }
 
 
     $areas_arr[$k]['first'] = $first;
